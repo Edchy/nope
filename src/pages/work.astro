@@ -2,12 +2,48 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const projects = [
-  { name: "Bakkerij Hartog", type: "Website", year: "2025", img: "eddie.avif", desc: "A warm, neighbourhood bakery website with online ordering and seasonal menus." },
-  { name: "Forma Studio", type: "Branding", year: "2025", img: "images/project-2.jpg", desc: "Brand identity for a minimal furniture studio — wordmark, palette, and print system." },
-  { name: "Kin", type: "App", year: "2024", img: "images/project-3.jpg", desc: "A family coordination app for shared schedules, tasks, and household notes." },
-  { name: "Lund Collective", type: "Website", year: "2024", img: "images/project-4.jpg", desc: "Portfolio site for a Malmö-based creative collective spanning film, photo, and design." },
-  { name: "Palma", type: "Design", year: "2024", img: "images/project-5.jpg", desc: "Visual identity and packaging for a small-batch olive oil label from Mallorca." },
-  { name: "Ström", type: "Website", year: "2023", img: "images/project-6.jpg", desc: "E-commerce site for a Swedish sportswear brand focused on cold-weather outdoor gear." },
+  {
+    name: "Bakkerij Hartog",
+    type: "Website",
+    year: "2025",
+    img: "eddie.avif",
+    desc: "A warm, neighbourhood bakery website with online ordering and seasonal menus.",
+  },
+  {
+    name: "Forma Studio",
+    type: "Branding",
+    year: "2025",
+    img: "images/project-2.jpg",
+    desc: "Brand identity for a minimal furniture studio — wordmark, palette, and print system.",
+  },
+  {
+    name: "Kin",
+    type: "App",
+    year: "2024",
+    img: "images/project-3.jpg",
+    desc: "A family coordination app for shared schedules, tasks, and household notes.",
+  },
+  {
+    name: "Lund Collective",
+    type: "Website",
+    year: "2024",
+    img: "images/project-4.jpg",
+    desc: "Portfolio site for a Malmö-based creative collective spanning film, photo, and design.",
+  },
+  {
+    name: "Palma",
+    type: "Design",
+    year: "2024",
+    img: "images/project-5.jpg",
+    desc: "Visual identity and packaging for a small-batch olive oil label from Mallorca.",
+  },
+  {
+    name: "Ström",
+    type: "Website",
+    year: "2023",
+    img: "images/project-6.jpg",
+    desc: "E-commerce site for a Swedish sportswear brand focused on cold-weather outdoor gear.",
+  },
 ];
 ---
 
@@ -17,16 +53,16 @@ const projects = [
       <h1 class="page-title visually-hidden">Work</h1>
       <div class="work-list">
         {
-        projects.map(({ name, type, year, img, desc }) => (
-          <div class="work-item" data-img={img} data-desc={desc}>
-            <span class="project-name">{name}</span>
-            <span class="project-meta">
-              <span class="project-type">{type}</span>
-              <span class="project-year">{year}</span>
-            </span>
-          </div>
-        ))
-      }
+          projects.map(({ name, type, year, img, desc }) => (
+            <div class="work-item" data-img={img} data-desc={desc}>
+              <span class="project-name">{name}</span>
+              <span class="project-meta">
+                <span class="project-type">{type}</span>
+                <span class="project-year">{year}</span>
+              </span>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -50,7 +86,7 @@ const projects = [
   }
 
   .work-list {
-    border-top: 1px solid var(--color-border-default);
+    /*border-top: 1px solid var(--color-border-default);*/
   }
 
   .work-item {
@@ -106,7 +142,7 @@ const projects = [
     display: flex;
     align-items: flex-start;
     gap: var(--space-4);
-    background: var(--neutral-50);
+    background: var(--neutral-100);
     padding: var(--space-3);
   }
 

@@ -6,8 +6,9 @@ const year = new Date().getFullYear();
 <footer class="site-footer">
   <div class="site-footer__shell layout-shell">
     <div class="site-footer__grid layout-grid">
+      <p class="site-footer__wordmark">{SITE_TITLE}</p>
       <p class="site-footer__copy">© {year} {SITE_TITLE}</p>
-      <p class="site-footer__tag">Made with soul. Made by people.</p>
+      <p class="site-footer__tag">Only the good stuff.</p>
     </div>
   </div>
 </footer>
@@ -42,6 +43,17 @@ const year = new Date().getFullYear();
     text-align: right;
   }
 
+  .site-footer__wordmark {
+    grid-column: 8 / 13;
+    justify-self: end;
+    font-size: var(--font-size-display);
+    font-weight: var(--font-weight-bold);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: var(--color-text-primary);
+    text-align: right;
+  }
+
   @media (max-width: 640px) {
     .site-footer__grid {
       grid-template-columns: 1fr;
@@ -49,9 +61,15 @@ const year = new Date().getFullYear();
     }
 
     .site-footer__copy,
-    .site-footer__tag {
+    .site-footer__tag,
+    .site-footer__wordmark {
       grid-column: 1;
       text-align: left;
+    }
+
+    .site-footer__wordmark {
+      justify-self: start;
+      line-height: 1;
     }
   }
 </style>
