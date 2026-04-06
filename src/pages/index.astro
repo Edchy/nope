@@ -9,16 +9,17 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section class="hero">
     <div class="hero__shell layout-shell">
       <div class="hero__grid layout-grid">
-        <p class="hero__explainer">
-          Websites. Apps. Design. <br />
-          Minimal. Considered. Human. <br />
-          For small companies and people who want it done properly.
-        </p>
-        <nav class="hero__actions">
-          <a href="/work" class="hero__cta hero__cta--primary">See work</a>
-          <a href="/contact" class="hero__cta hero__cta--secondary">Say hello</a
-          >
-        </nav>
+        <div class="hero__copy">
+          <h1 class="hero__title">Minimal. Considered. Human.</h1>
+          <p class="hero__summary">
+            Websites. Apps. Design. <br /> Fast. Honest. Built to last.
+          </p>
+          <p class="hero__summary"></p>
+          <nav class="hero__actions">
+            <a href="/work" class="hero__cta hero__cta--primary">See work</a>
+            <a href="/contact" class="hero__cta hero__cta--secondary">Say hello</a>
+          </nav>
+        </div>
       </div>
     </div>
   </section>
@@ -42,40 +43,66 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   .hero__grid {
     width: 100%;
     min-height: 100%;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto 1fr;
     align-items: start;
-    row-gap: var(--space-6);
-    padding-top: var(--space-8);
-    padding-bottom: var(--space-12);
+    row-gap: var(--space-8);
+    padding-top: var(--space-20);
+    padding-bottom: var(--space-20);
   }
 
-  .hero__explainer {
-    grid-column: 2 / 6;
-    grid-row: 1;
-    justify-self: start;
-    font-size: var(--font-size-base);
-    color: var(--color-text-secondary);
+  .hero__copy {
+    grid-column: 2 / 8;
+    grid-row: 2;
+    display: grid;
+    row-gap: var(--space-6);
+    align-content: start;
+  }
+
+  .hero__title {
+    max-width: 9ch;
+    font-size: clamp(4.2rem, 8vw, 7rem);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-display);
+    letter-spacing: -0.06em;
+    text-wrap: balance;
+    color: var(--color-text-primary);
+  }
+
+  .hero__title-break {
+    display: block;
+    color: color-mix(
+      in srgb,
+      var(--color-text-primary) 84%,
+      var(--neutral-500)
+    );
+  }
+
+  .hero__summary {
+    max-width: 28rem;
+    font-size: var(--font-size-lg);
     line-height: var(--line-height-relaxed);
-    text-align: left;
+    text-wrap: pretty;
+    color: color-mix(
+      in srgb,
+      var(--color-text-primary) 72%,
+      var(--neutral-500)
+    );
   }
 
   .hero__actions {
-    grid-column: 4 / 10;
-    grid-row: 2;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
-    gap: var(--space-4);
-    justify-self: center;
-    align-self: center;
+    gap: var(--space-3);
+    justify-self: start;
+    padding-top: var(--space-2);
   }
 
   .hero__cta {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 11rem;
+    min-width: 10rem;
     padding-inline: var(--space-6);
     padding-block: var(--space-3);
     font-size: var(--font-size-sm);
@@ -101,13 +128,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   }
 
   .hero__cta--secondary {
-    background-color: transparent;
-    box-shadow: inset 0 0 0 var(--border-width-1) var(--color-text-primary);
     color: var(--color-text-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
   }
 
   .hero__cta--secondary:hover {
-    background-color: var(--color-background-surface);
     color: var(--color-text-primary);
     text-decoration: none;
   }
@@ -119,13 +146,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
     .hero__grid {
       min-height: auto;
-      grid-template-rows: none;
+      grid-template-rows: auto;
       row-gap: var(--space-6);
       padding-top: var(--space-8);
       padding-bottom: var(--space-10);
     }
 
-    .hero__explainer,
+    .hero__eyebrow,
+    .hero__copy,
     .hero__actions {
       grid-column: 1 / -1;
       grid-row: auto;
@@ -133,9 +161,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       align-self: auto;
     }
 
-    .hero__explainer {
-      font-size: var(--font-size-sm);
-      text-align: left;
+    .hero__title {
+      max-width: 11ch;
+      font-size: clamp(3rem, 15vw, 4.5rem);
+    }
+
+    .hero__summary {
+      font-size: var(--font-size-base);
     }
 
     .hero__actions {

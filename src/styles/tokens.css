@@ -8,7 +8,7 @@
 :root {
   /* Color primitives */
   --neutral-50: #fafafa;
-  --neutral-100: #ffffe2;
+  --neutral-100: #f2f0ef;
   --neutral-200: #e8e8e8;
   --neutral-300: #d0d0d0;
   --neutral-400: #a0a0a0;
@@ -46,6 +46,7 @@
   --font-weight-regular: 400;
   --font-weight-bold: 700;
 
+  --line-height-display: 0.85;
   --line-height-tight: 1.25;
   --line-height-snug: 1.375;
   --line-height-normal: 1.5;
@@ -91,6 +92,9 @@
   --max-width-content: 720px;
   --max-width-wide: 1024px;
   --max-width-layout: 1200px;
+
+  /* Motion */
+  --motion-duration-page-transition: 0.55s;
 
   /* Font families */
   --font-family-base:
