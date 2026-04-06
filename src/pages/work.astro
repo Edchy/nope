@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const projects = [
+const featuredProjects = [
   {
     name: "Bakkerij Hartog",
     type: "Website",
@@ -30,19 +30,33 @@ const projects = [
     img: "images/project-4.jpg",
     desc: "Portfolio site for a Malmö-based creative collective spanning film, photo, and design.",
   },
+];
+
+const archiveProjects = [
   {
     name: "Palma",
     type: "Design",
     year: "2024",
-    img: "images/project-5.jpg",
-    desc: "Visual identity and packaging for a small-batch olive oil label from Mallorca.",
   },
   {
     name: "Ström",
     type: "Website",
     year: "2023",
-    img: "images/project-6.jpg",
-    desc: "E-commerce site for a Swedish sportswear brand focused on cold-weather outdoor gear.",
+  },
+  {
+    name: "North Shelf",
+    type: "Identity",
+    year: "2023",
+  },
+  {
+    name: "Mar Row",
+    type: "Campaign",
+    year: "2022",
+  },
+  {
+    name: "Ateljé Norr",
+    type: "Website",
+    year: "2022",
   },
 ];
 ---
@@ -51,10 +65,30 @@ const projects = [
   <section class="page-shell layout-shell work-page">
     <div class="page-grid layout-grid">
       <h1 class="page-title visually-hidden">Work</h1>
-      <div class="work-list">
+      <div class="work-section work-section-featured">
+        <p class="section-label">Selected work</p>
+        <div class="work-list">
+          {
+            featuredProjects.map(({ name, type, year, img, desc }) => (
+              <div class="work-item work-item-featured" data-img={img} data-desc={desc}>
+                <span class="project-name">{name}</span>
+                <span class="project-meta">
+                  <span class="project-type">{type}</span>
+                  <span class="project-year">{year}</span>
+                </span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+      <div class="work-section work-section-archive">
+        <p class="section-label">Archive</p>
+        <p class="archive-intro">
+          Smaller commissions, earlier systems, and work that still belongs in the index.
+        </p>
         {
-          projects.map(({ name, type, year, img, desc }) => (
-            <div class="work-item" data-img={img} data-desc={desc}>
+          archiveProjects.map(({ name, type, year }) => (
+            <div class="work-item work-item-archive">
               <span class="project-name">{name}</span>
               <span class="project-meta">
                 <span class="project-type">{type}</span>
@@ -89,21 +123,50 @@ const projects = [
     grid-column: 3 / 10;
   }
 
+  .work-section {
+    grid-column: 3 / 10;
+  }
+
+  .work-section-archive {
+    margin-top: var(--space-16);
+  }
+
+  .section-label {
+    margin: 0 0 var(--space-6);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+
+  .archive-intro {
+    max-width: 28rem;
+    margin: 0 0 var(--space-6);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-secondary);
+  }
+
   .work-item {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+    gap: var(--space-6);
+  }
+
+  .work-item-featured {
     padding: var(--space-3) 0;
     cursor: crosshair;
     user-select: none;
   }
 
-  .work-item:hover {
-    border-bottom: 1px solid var(--neutral-900);
+  .work-item-featured:hover .project-name {
+    transform: translateX(var(--space-2));
   }
 
-  .work-item:hover .project-name {
-    transform: translateX(var(--space-2));
+  .work-item-archive {
+    padding: var(--space-2) 0;
+    color: var(--color-text-secondary);
   }
 
   .project-name {
@@ -114,10 +177,17 @@ const projects = [
     color: var(--color-text-primary);
   }
 
+  .work-item-archive .project-name {
+    font-size: var(--font-size-base);
+    letter-spacing: -0.01em;
+    color: var(--color-text-secondary);
+  }
+
   .project-meta {
     display: flex;
     gap: var(--space-8);
     align-items: baseline;
+    flex-shrink: 0;
   }
 
   .project-type {
@@ -177,7 +247,8 @@ const projects = [
     }
 
     .page-title,
-    .work-list {
+    .work-list,
+    .work-section {
       grid-column: 1;
     }
 
@@ -185,8 +256,30 @@ const projects = [
       margin-bottom: var(--space-6);
     }
 
+    .work-section-archive {
+      margin-top: var(--space-12);
+    }
+
+    .archive-intro {
+      max-width: none;
+    }
+
+    .work-item {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+
     .project-name {
       font-size: 1.1rem;
+    }
+
+    .work-item-archive .project-name {
+      font-size: var(--font-size-sm);
+    }
+
+    .project-meta {
+      gap: var(--space-4);
     }
 
     .preview {
@@ -201,7 +294,7 @@ const projects = [
   function initWorkPreview() {
     cleanupWorkPreview?.();
 
-    const items = document.querySelectorAll(".work-item");
+    const items = document.querySelectorAll(".work-item-featured");
     const preview = document.getElementById("preview");
     const img = document.getElementById("preview-img") as HTMLImageElement | null;
     const desc = document.getElementById("preview-desc");

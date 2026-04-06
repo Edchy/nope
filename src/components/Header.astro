@@ -5,6 +5,7 @@ const navLinks = [
   { href: "/work", label: "Work" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Say hello" },
+  { href: "#", label: "Blog", isExternal: true },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -19,7 +20,7 @@ const currentPath = Astro.url.pathname;
       <nav class="site-header__nav" aria-label="Main navigation">
         <ul class="site-header__links">
           {
-            navLinks.map(({ href, label }) => (
+            navLinks.map(({ href, label, isExternal }) => (
               <li>
                 <a
                   href={href}
@@ -28,7 +29,14 @@ const currentPath = Astro.url.pathname;
                     { "site-header__link--active": currentPath === href },
                   ]}
                 >
-                  {label}
+                  <span>{label}</span>
+                  {
+                    isExternal && (
+                      <span class="site-header__external-indicator" aria-hidden="true">
+                        ↗
+                      </span>
+                    )
+                  }
                 </a>
               </li>
             ))
@@ -82,6 +90,9 @@ const currentPath = Astro.url.pathname;
   }
 
   .site-header__link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--space-1);
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-medium);
     letter-spacing: 0.08em;
@@ -95,6 +106,12 @@ const currentPath = Astro.url.pathname;
   .site-header__link--active {
     color: var(--color-text-primary);
     text-decoration: none;
+  }
+
+  .site-header__external-indicator {
+    font-size: 0.95em;
+    line-height: 1;
+    transform: translateY(-0.08em);
   }
 
   @media (max-width: 640px) {
