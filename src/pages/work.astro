@@ -1,0 +1,197 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const projects = [
+  { name: "Bakkerij Hartog", type: "Website", year: "2025", img: "eddie.avif", desc: "A warm, neighbourhood bakery website with online ordering and seasonal menus." },
+  { name: "Forma Studio", type: "Branding", year: "2025", img: "images/project-2.jpg", desc: "Brand identity for a minimal furniture studio — wordmark, palette, and print system." },
+  { name: "Kin", type: "App", year: "2024", img: "images/project-3.jpg", desc: "A family coordination app for shared schedules, tasks, and household notes." },
+  { name: "Lund Collective", type: "Website", year: "2024", img: "images/project-4.jpg", desc: "Portfolio site for a Malmö-based creative collective spanning film, photo, and design." },
+  { name: "Palma", type: "Design", year: "2024", img: "images/project-5.jpg", desc: "Visual identity and packaging for a small-batch olive oil label from Mallorca." },
+  { name: "Ström", type: "Website", year: "2023", img: "images/project-6.jpg", desc: "E-commerce site for a Swedish sportswear brand focused on cold-weather outdoor gear." },
+];
+---
+
+<BaseLayout title="Work — NøPE" description="Selected work.">
+  <section class="page-shell layout-shell work-page">
+    <div class="page-grid layout-grid">
+      <h1 class="page-title visually-hidden">Work</h1>
+      <div class="work-list">
+        {
+        projects.map(({ name, type, year, img, desc }) => (
+          <div class="work-item" data-img={img} data-desc={desc}>
+            <span class="project-name">{name}</span>
+            <span class="project-meta">
+              <span class="project-type">{type}</span>
+              <span class="project-year">{year}</span>
+            </span>
+          </div>
+        ))
+      }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<!-- Floating preview -->
+<div class="preview" id="preview">
+  <img id="preview-img" src="" alt="" />
+  <p id="preview-desc"></p>
+</div>
+
+<style>
+  .page-title {
+    grid-column: 1 / 4;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-text-secondary);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding-top: 0.2em;
+  }
+
+  .work-list {
+    border-top: 1px solid var(--color-border-default);
+  }
+
+  .work-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--color-border-default);
+    cursor: crosshair;
+    user-select: none;
+  }
+
+  .work-item:hover .project-name {
+    transform: translateX(var(--space-2));
+  }
+
+  .project-name {
+    font-size: 1.3rem;
+    font-weight: var(--font-weight-regular);
+    letter-spacing: -0.02em;
+    transition: transform 0.2s ease;
+    color: var(--color-text-primary);
+  }
+
+  .project-meta {
+    display: flex;
+    gap: var(--space-8);
+    align-items: baseline;
+  }
+
+  .project-type {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+  }
+
+  .project-year {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    min-width: 2.5rem;
+    text-align: right;
+  }
+
+  .preview {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.18s ease;
+    transform: translate(28px, -50%);
+    will-change: transform, opacity;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
+    background: var(--neutral-50);
+    padding: var(--space-3);
+  }
+
+  .preview.visible {
+    opacity: 1;
+  }
+
+  .preview img {
+    width: 240px;
+    height: 170px;
+    object-fit: cover;
+    display: block;
+    flex-shrink: 0;
+  }
+
+  #preview-desc {
+    width: 160px;
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    margin: 0;
+    padding-top: 2px;
+  }
+
+  @media (max-width: 640px) {
+    .page-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .page-title,
+    .work-list {
+      grid-column: 1;
+    }
+
+    .page-title {
+      margin-bottom: var(--space-6);
+    }
+
+    .project-name {
+      font-size: 1.1rem;
+    }
+
+    .preview {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const items = document.querySelectorAll(".work-item");
+  const preview = document.getElementById("preview");
+  const img = document.getElementById("preview-img") as HTMLImageElement;
+  const desc = document.getElementById("preview-desc");
+
+  let mouseX = 0;
+  let mouseY = 0;
+  let rafId: number | null = null;
+
+  document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(() => {
+      if (!preview) return;
+      preview.style.transform = `translate(${mouseX + 28}px, calc(${mouseY}px - 50%))`;
+      preview.style.left = "0";
+      preview.style.top = "0";
+    });
+  });
+
+  items.forEach((item) => {
+    item.addEventListener("mouseenter", () => {
+      const el = item as HTMLElement;
+      const src = el.dataset.img;
+      const text = el.dataset.desc;
+      if (src && img && preview) {
+        img.src = src;
+        if (desc) desc.textContent = text ?? "";
+        preview.classList.add("visible");
+      }
+    });
+
+    item.addEventListener("mouseleave", () => {
+      preview?.classList.remove("visible");
+    });
+  });
+</script>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Work — NøPE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg:        #F5F3EE;
+      --surface:   #EDEAE3;
+      --text:      #111110;
+      --secondary: #7A786F;
+      --line:      #D4D0C8;
+      --base:      8px;
+    }
+
+    html {
+      font-size: 16px;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-weight: 400;
+      line-height: 1.5;
+      min-height: 100vh;
+      padding: calc(var(--base) * 5) calc(var(--base) * 6);
+    }
+
+    /* ── Nav ── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: calc(var(--base) * 14);
+    }
+
+    .wordmark {
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: calc(var(--base) * 4);
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      color: var(--secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+    }
+
+    /* ── Page header ── */
+    .page-header {
+      margin-bottom: calc(var(--base) * 8);
+    }
+
+    .page-header h1 {
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: var(--secondary);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* ── Work list ── */
+    .work-list {
+      width: 100%;
+      border-top: 1px solid var(--line);
+    }
+
+    .work-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: calc(var(--base) * 3) 0;
+      border-bottom: 1px solid var(--line);
+      cursor: crosshair;
+      user-select: none;
+    }
+
+    .work-item:hover .project-name {
+      transform: translateX(calc(var(--base) * 1));
+    }
+
+    .project-name {
+      font-size: 1.3rem;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      transition: transform 0.2s ease;
+      color: var(--text);
+    }
+
+    .project-meta {
+      display: flex;
+      gap: calc(var(--base) * 4);
+      align-items: baseline;
+    }
+
+    .project-type {
+      font-size: 0.8125rem;
+      color: var(--secondary);
+    }
+
+    .project-year {
+      font-size: 0.8125rem;
+      color: var(--secondary);
+      min-width: 2.5rem;
+      text-align: right;
+    }
+
+    /* ── Hover preview ── */
+    .preview {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0;
+      transition: opacity 0.18s ease;
+      transform: translate(28px, -50%);
+      will-change: transform, opacity;
+    }
+
+    .preview.visible {
+      opacity: 1;
+    }
+
+    .preview img {
+      width: 340px;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: calc(var(--base) * 14);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    footer p {
+      font-size: 0.8125rem;
+      color: var(--secondary);
+    }
+
+    footer a {
+      font-size: 0.8125rem;
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 1px;
+      transition: border-color 0.15s ease;
+    }
+
+    footer a:hover {
+      border-color: var(--text);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      body {
+        padding: calc(var(--base) * 4) calc(var(--base) * 3);
+      }
+
+      nav {
+        margin-bottom: calc(var(--base) * 10);
+      }
+
+      .project-name {
+        font-size: 1.1rem;
+      }
+
+      .preview {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="wordmark" href="/">NøPE</a>
+    <ul class="nav-links">
+      <li><a href="/work" class="active">Work</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/contact">Say hello</a></li>
+    </ul>
+  </nav>
+
+  <header class="page-header">
+    <h1>Work</h1>
+  </header>
+
+  <main>
+    <div class="work-list">
+
+      <!--
+        Replace data-img with the path to your actual project image.
+        e.g. data-img="images/bakkerij-hartog.jpg"
+      -->
+
+      <div class="work-item" data-img="images/project-1.jpg">
+        <span class="project-name">Bakkerij Hartog</span>
+        <span class="project-meta">
+          <span class="project-type">Website</span>
+          <span class="project-year">2025</span>
+        </span>
+      </div>
+
+      <div class="work-item" data-img="images/project-2.jpg">
+        <span class="project-name">Forma Studio</span>
+        <span class="project-meta">
+          <span class="project-type">Branding</span>
+          <span class="project-year">2025</span>
+        </span>
+      </div>
+
+      <div class="work-item" data-img="images/project-3.jpg">
+        <span class="project-name">Kin</span>
+        <span class="project-meta">
+          <span class="project-type">App</span>
+          <span class="project-year">2024</span>
+        </span>
+      </div>
+
+      <div class="work-item" data-img="images/project-4.jpg">
+        <span class="project-name">Lund Collective</span>
+        <span class="project-meta">
+          <span class="project-type">Website</span>
+          <span class="project-year">2024</span>
+        </span>
+      </div>
+
+      <div class="work-item" data-img="images/project-5.jpg">
+        <span class="project-name">Palma</span>
+        <span class="project-meta">
+          <span class="project-type">Design</span>
+          <span class="project-year">2024</span>
+        </span>
+      </div>
+
+      <div class="work-item" data-img="images/project-6.jpg">
+        <span class="project-name">Ström</span>
+        <span class="project-meta">
+          <span class="project-type">Website</span>
+          <span class="project-year">2023</span>
+        </span>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>© NøPE 2025</p>
+    <a href="/contact">Say hello →</a>
+  </footer>
+
+  <!-- Floating preview -->
+  <div class="preview" id="preview">
+    <img id="preview-img" src="" alt="">
+  </div>
+
+  <script>
+    const items   = document.querySelectorAll('.work-item');
+    const preview = document.getElementById('preview');
+    const img     = document.getElementById('preview-img');
+
+    let mouseX = 0;
+    let mouseY = 0;
+    let rafId  = null;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        preview.style.transform = `translate(${mouseX + 28}px, calc(${mouseY}px - 50%))`;
+        preview.style.left = '0';
+        preview.style.top  = '0';
+      });
+    });
+
+    items.forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        const src = item.dataset.img;
+        if (src) {
+          img.src = src;
+          preview.classList.add('visible');
+        }
+      });
+
+      item.addEventListener('mouseleave', () => {
+        preview.classList.remove('visible');
+      });
+    });
+  </script>
+
+</body>
+</html>

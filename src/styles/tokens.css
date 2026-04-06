@@ -1,0 +1,100 @@
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   Level 1: Primitives
+   ------------------------------------------------------------ */
+:root {
+  /* Color primitives */
+  --neutral-50: #fafafa;
+  --neutral-100: #f4f4f4;
+  --neutral-200: #e8e8e8;
+  --neutral-300: #d0d0d0;
+  --neutral-400: #a0a0a0;
+  --neutral-500: #707070;
+  --neutral-600: #505050;
+  --neutral-700: #303030;
+  --neutral-800: #1a1a1a;
+  --neutral-900: #0f0f0f;
+  --neutral-950: #080808;
+
+  /* Spacing primitives */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* Typography primitives */
+  --font-size-xs: 0.75rem; /* 12px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-base: 1rem; /* 16px */
+  --font-size-lg: 1.125rem; /* 18px */
+  --font-size-xl: 1.25rem; /* 20px */
+  --font-size-2xl: 1.5rem; /* 24px */
+  --font-size-3xl: 1.875rem; /* 30px */
+  --font-size-4xl: 2.25rem; /* 36px */
+  --font-size-display: clamp(4rem, 12vw, 9rem); /* Hero wordmark */
+
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.375;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+
+  /* Border primitives */
+  --border-radius-sm: 4px;
+
+  --border-radius-full: 9999px;
+
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+}
+
+/* ------------------------------------------------------------
+   Level 2: Semantic tokens (light theme)
+   ------------------------------------------------------------ */
+:root {
+  /* Backgrounds */
+  --color-background: var(--neutral-50);
+  --color-background-surface: #ffffff;
+  --color-background-subtle: var(--neutral-100);
+
+  /* Text */
+  --color-text-primary: var(--neutral-900);
+  --color-text-secondary: var(--neutral-500);
+  --color-text-disabled: var(--neutral-400);
+  --color-text-inverse: var(--neutral-50);
+
+  /* Actions */
+  --color-action-primary: var(--neutral-900);
+  --color-action-primary-hover: var(--neutral-700);
+
+  /* Borders */
+  --color-border-default: var(--neutral-200);
+  --color-border-strong: var(--neutral-300);
+
+  /* Semantic spacing */
+  --space-section: var(--space-20);
+  --space-container-x: var(--space-6);
+
+  /* Layout */
+  --max-width-content: 720px;
+  --max-width-wide: 1024px;
+  --max-width-layout: 1200px;
+
+  /* Font families */
+  --font-family-base:
+    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  --font-family-mono: "Courier New", Courier, monospace;
+}

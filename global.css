@@ -1,0 +1,95 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --jr-gron: rgb(63, 69, 44);
+  --jr-svart: rgb(0, 0, 0);
+  --jr-vit: rgb(255, 255, 255);
+  --jr-ljusgul: rgb(239, 214, 120);
+  --jr-ocra: rgb(188, 149, 72);
+  --jr-orostat: rgb(131, 150, 120);
+  --jr-brun: rgb(107, 80, 45);
+  --jr-morkrost: rgb(58, 40, 23);
+  --jr-franchese: rgb(43, 75, 88);
+  --jr-poabs-esp: rgb(255, 224, 18);
+  --jr-grande: rgb(58, 175, 156);
+  --jr-conejo: rgb(126, 151, 117);
+  --jr-poabs-bry: rgb(233, 89, 86);
+  --jr-mezzo: rgb(49, 145, 82);
+  --jr-gold: #f6d957;
+  --hr: #ffdd3d;
+  --font: "Maax Mono", "Courier New", monospace;
+  --font-display: "Orator Std", "Maax Mono", monospace;
+
+  --text-display: clamp(3rem, 11vw, 10rem);
+  --text-nav: 0.65rem;
+  --text-body: clamp(0.85rem, 1.2vw, 1rem);
+  --text-ui: 0.75rem;
+  --line-height: 1.5;
+
+  --weight-regular: 400;
+  --weight-bold: 700;
+  --letter-spacing-tight: -0.05em;
+
+  --space-sm: 0.5rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+
+  --opacity: 0.6;
+
+  --overlay-dark: rgba(0, 0, 0, 0.35);
+  --overlay-darker: rgba(0, 0, 0, 0.55);
+}
+
+@supports (color: color(display-p3 0 0 0)) {
+  :root {
+    --jr-gron: color(display-p3 0.247 0.271 0.173);
+    --jr-ljusgul: color(display-p3 0.937 0.839 0.471);
+    --jr-ocra: color(display-p3 0.737 0.584 0.282);
+    --jr-orostat: color(display-p3 0.514 0.588 0.471);
+    --jr-brun: color(display-p3 0.42 0.314 0.176);
+    --jr-morkrost: color(display-p3 0.227 0.157 0.09);
+  }
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--jr-gron);
+  color: var(--jr-vit);
+}
+
+/* Custom WebKit scrollbar styles */
+::-webkit-scrollbar {
+  height: 100%;
+  width: 0.75rem;
+  background-color: initial;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  border: 0.125rem solid transparent;
+  background-color: var(--jr-gold);
+  background-clip: padding-box;
+  min-height: 2.5rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--jr-gold);
+}
+
+::-webkit-scrollbar-track {
+  background-color: initial;
+}

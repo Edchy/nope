@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const projects = [
+  {
+    title: 'Project One',
+    description: 'A short description of what this project does and why it matters.',
+    url: '#',
+    tags: ['Astro', 'TypeScript'],
+    image: 'https://picsum.photos/seed/proj1/800/450',
+  },
+  {
+    title: 'Project Two',
+    description: 'Another project — what you built, the problem it solves, what you learned.',
+    url: '#',
+    tags: ['React', 'Supabase'],
+    image: 'https://picsum.photos/seed/proj2/800/450',
+  },
+  {
+    title: 'Project Three',
+    description: 'A third project. Replace all of this with your real work.',
+    url: '#',
+    tags: ['Design', 'CSS'],
+    image: 'https://picsum.photos/seed/proj3/800/450',
+  },
+];
+---
+
+<BaseLayout title="Projects — Your Name" description="Things I've built.">
+  <section class="page-shell layout-shell">
+    <div class="page-grid layout-grid">
+      <h1 class="page-title visually-hidden">Projects</h1>
+    </div>
+    <ul class="project-grid">
+      {projects.map(({ title, description, url, tags, image }) => (
+        <li class="project-card">
+          <a href={url} class="project-card__link" target="_blank" rel="noopener">
+            <img src={image} alt={title} class="project-card__image" width="800" height="450" />
+            <div class="project-card__body">
+              <h2 class="project-card__title">{title}</h2>
+              <p class="project-card__desc">{description}</p>
+              <ul class="project-card__tags">
+                {tags.map(tag => <li class="project-card__tag">{tag}</li>)}
+              </ul>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-title {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    margin-bottom: var(--space-10);
+  }
+
+  .project-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-6);
+  }
+
+  .project-card {
+    overflow: hidden;
+    background-color: var(--color-background-surface);
+  }
+
+  .project-card__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .project-card__image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .project-card__body {
+    padding: var(--space-4) var(--space-6) var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .project-card__title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+  }
+
+  .project-card__desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .project-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+    margin-top: var(--space-2);
+  }
+
+  .project-card__tag {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+    padding: 0;
+  }
+</style>
