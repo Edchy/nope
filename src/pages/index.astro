@@ -11,22 +11,23 @@ import LiftButton from "../components/LiftButton.astro";
     <div class="hero__shell layout-shell">
       <div class="hero__grid layout-grid">
         <div class="hero__copy">
-          <h1 class="hero__title">Minimal. Considered. Human.</h1>
+          <h1 class="hero__title">Human. Minimal. Deliberate.</h1>
           <p class="hero__summary">
-            Websites. Apps. Design. <br /> Fast. Honest. Built to last. All things
-            1s & 0s.
+            Websites. Apps. Design. <br />
+            Not sure what you need yet. <br />
+            That's fine. Most people aren't. <br />
+            Say hello and we'll figure it out.
           </p>
           <p class="hero__summary"></p>
           <nav class="hero__actions">
-            <LiftButton href="/work" variant="primary">See work</LiftButton>
-            <LiftButton href="/contact" variant="secondary">Say hello</LiftButton>
+            <LiftButton href="/contact" variant="primary">Say hello</LiftButton>
+            <LiftButton href="/work" variant="secondary">See work</LiftButton>
           </nav>
         </div>
       </div>
     </div>
   </section>
 </BaseLayout>
-
 
 <style>
   .hero {
@@ -83,7 +84,7 @@ import LiftButton from "../components/LiftButton.astro";
   .hero__summary {
     max-width: 28rem;
     font-size: var(--font-size-lg);
-    line-height: var(--line-height-relaxed);
+    line-height: var(--line-height-snug);
     text-wrap: pretty;
     color: color-mix(
       in srgb,
@@ -100,7 +101,6 @@ import LiftButton from "../components/LiftButton.astro";
     justify-self: start;
     padding-top: var(--space-2);
   }
-
 
   @media (max-width: 640px) {
     .hero {

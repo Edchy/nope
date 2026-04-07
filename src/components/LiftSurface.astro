@@ -1,0 +1,34 @@
+---
+interface Props {
+  href: string;
+  class?: string;
+}
+
+const { href, class: className = "" } = Astro.props;
+---
+
+<span class="lift-surface-wrap">
+  <a href={href} class:list={["lift-surface", className]}>
+    <slot />
+  </a>
+</span>
+
+<style>
+  .lift-surface-wrap {
+    display: block;
+    width: 100%;
+  }
+
+  .lift-surface {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .lift-surface:hover,
+  .lift-surface:focus-visible {
+    text-decoration: none;
+    color: inherit;
+  }
+</style>

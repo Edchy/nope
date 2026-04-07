@@ -7,30 +7,31 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <div class="page-grid layout-grid">
       <h1 class="page-title visually-hidden">About</h1>
       <div class="about-chunk-1">
-        NOPE is a small studio. We make websites, apps, and digital things. The
-        name is intentional. We say no to most things. Not out of stubbornness —
-        out of conviction. Most things don't need to exist. Extra features
-        nobody asked for. Pages that fill space. Design that decorates instead
-        of communicates. Copy that sounds like it was written by a committee. We
-        remove all of it. What's left is usually better.
+        NOPE is a small studio. We make websites, apps, and all things 1s & 0s.
+        The name is intentional. We say no to most things. Not out of
+        stubbornness, but out of conviction. Most things don't need to exist.
+        Extra features nobody asked for. Pages that fill space. Design that
+        decorates instead of communicates. Copy that sounds like it was written
+        by a committee. We remove all of it. What's left is usually better.
       </div>
       <div class="about-chunk-2">
         This is minimalism, but not as an aesthetic. As a method. Every decision
         starts with a question: does this need to be here? If the answer isn't
-        clearly yes, it goes. We apply this to everything — the work we take on,
+        clearly yes, it goes. We apply this to everything. The work we take on,
         the words we write, the pixels we place.
       </div>
       <div class="about-chunk-3">
         We take design seriously. Not as decoration but as communication. The
-        typeface, the spacing, the colour, the weight of a line — each one is a
-        decision. Decisions made carelessly produce work that feels wrong even
-        when people can't say why. We make them carefully.
+        typeface, the spacing, the colour, the weight of a line. These are all
+        decisions. Decisions made carelessly produce work that feels wrong even
+        when people can't say why. We make them carefully. Good design
+        disappears. You stop noticing it and start using it.
       </div>
       <div class="about-chunk-4">
-        Good design disappears. You stop noticing it and start using it. NOPE is
-        very much me. I don't talk if I don't have to. I don't fluff. I keep
-        things minimal — in work and in life. The brand isn't a strategy. It's
-        just how I think. — Eddie
+        NOPE is very much me. I don't talk if I don't have to. I don't fluff. I
+        keep things minimal — in work and in life. The brand isn't a strategy.
+        It's just how I think.
+        <span class="signature">— Eddie</span>
       </div>
     </div>
   </section>
@@ -46,24 +47,51 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       padding-top: 0.2em; /* optical alignment with body text */
     }
 
+    .about-chunk-1::first-letter,
+    .about-chunk-2::first-letter,
+    .about-chunk-3::first-letter,
+    .about-chunk-4::first-letter {
+      font-size: 3.5em;
+      line-height: 0.8;
+      float: left;
+      margin-right: 0.08em;
+      margin-top: 0.05em;
+    }
+
     .about-chunk-1 {
-      grid-column: 3 / 7;
+      grid-column: 3 / 8;
       grid-row: 2;
+      padding-block: var(--space-12);
     }
 
     .about-chunk-2 {
-      grid-column: 8 / 12;
+      grid-column: 6 / 11;
       grid-row: 3;
+      padding-block: var(--space-12);
     }
 
     .about-chunk-3 {
-      grid-column: 3 / 7;
+      grid-column: 3 / 8;
       grid-row: 4;
+      padding-block: var(--space-12);
     }
 
     .about-chunk-4 {
-      grid-column: 8 / 12;
+      grid-column: 6 / 11;
       grid-row: 5;
+      padding-block: var(--space-12);
+    }
+
+    .about-chunk-4::first-letter {
+      all: unset;
+    }
+
+    .signature {
+      display: block;
+      margin-top: var(--space-8);
+      color: var(--color-text-secondary);
+      font-style: italic;
+      letter-spacing: 0.02em;
     }
 
     @media (max-width: 1024px) {
