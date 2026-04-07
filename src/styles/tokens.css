@@ -35,16 +35,30 @@
   --space-20: 80px;
   --space-24: 96px;
 
-  /* Typography primitives */
-  --font-size-xs: 0.75rem; /* 12px */
-  --font-size-sm: 0.875rem; /* 14px */
-  --font-size-base: 1rem; /* 16px */
-  --font-size-lg: 1.125rem; /* 18px */
-  --font-size-xl: 1.25rem; /* 20px */
-  --font-size-2xl: 1.5rem; /* 24px */
-  --font-size-3xl: 1.875rem; /* 30px */
-  --font-size-4xl: 2.25rem; /* 36px */
-  --font-size-display: clamp(4rem, 12vw, 9rem); /* Hero wordmark */
+  /* Typography primitives — fluid type scale (Utopia, utopia.fyi)
+     Min viewport: 375px  Max viewport: 1240px
+     Min scale: 1.2 (minor third)  Max scale: 1.25 (major third)
+     Step 0: 1rem @ 375px → 1.125rem @ 1240px */
+  --step--2: clamp(0.6944rem, 0.6856rem + 0.0444vw, 0.72rem);
+  --step--1: clamp(0.8333rem, 0.8101rem + 0.1159vw, 0.9rem);
+  --step-0:  clamp(1rem,      0.9565rem + 0.2174vw, 1.125rem);
+  --step-1:  clamp(1.2rem,    1.1283rem + 0.3587vw, 1.4063rem);
+  --step-2:  clamp(1.44rem,   1.3295rem + 0.5527vw, 1.7578rem);
+  --step-3:  clamp(1.728rem,  1.5648rem + 0.816vw,  2.1973rem);
+  --step-4:  clamp(2.0736rem, 1.8395rem + 1.1703vw, 2.7466rem);
+  --step-5:  clamp(2.4883rem, 2.1597rem + 1.6431vw, 3.4332rem);
+
+  /* Semantic aliases → existing code needs no changes */
+  --font-size-xs:   var(--step--2);
+  --font-size-sm:   var(--step--1);
+  --font-size-base: var(--step-0);
+  --font-size-lg:   var(--step-1);
+  --font-size-xl:   var(--step-2);
+  --font-size-2xl:  var(--step-3);
+  --font-size-3xl:  var(--step-4);
+  --font-size-4xl:  var(--step-5);
+
+  --font-size-display: clamp(4rem, 12vw, 9rem); /* Hero/footer wordmark — intentionally outside step scale */
 
   --font-weight-regular: 400;
   --font-weight-bold: 700;
@@ -98,7 +112,14 @@
 
   /* Motion */
   --motion-duration-page-transition: 0.55s;
+  --motion-duration-footer-reveal: 0.9s;
+  --motion-ease-decelerate: cubic-bezier(0.19, 1, 0.22, 1);
+  --motion-ease-footer-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
   /* Font families */
   --font-family-base: var(--font-jost);
+
+  /* Footer */
+  --footer-letter-stagger: 52ms;
+  --footer-wordmark-offset-y: 1.15em;
 }

@@ -1,0 +1,119 @@
+---
+interface Props {
+  href: string;
+  variant?: "primary" | "secondary";
+  max?: number;
+}
+
+const { href, variant = "primary", max = 20 } = Astro.props;
+---
+
+<span class="lift-wrap" data-max={max}>
+  <a href={href} class={`lift-btn lift-btn--${variant}`}>
+    <slot />
+  </a>
+</span>
+
+<script>
+  function init() {
+    document.querySelectorAll<HTMLElement>(".lift-wrap").forEach((wrap) => {
+      const btn = wrap.querySelector<HTMLElement>(".lift-btn")!;
+      const MAX = Number(wrap.dataset.max ?? 20);
+
+      wrap.addEventListener("mousemove", (e) => {
+        const rect = wrap.getBoundingClientRect();
+        const nx = (e.clientX - rect.left) / rect.width;
+        const ny = (e.clientY - rect.top) / rect.height;
+
+        btn.style.setProperty("--_tx", `${nx * MAX}px`);
+        btn.style.setProperty("--_ty", `${-(ny * MAX)}px`);
+        btn.style.setProperty("--_sx", `${-(nx * MAX)}px`);
+        btn.style.setProperty("--_sy", `${ny * MAX}px`);
+        btn.style.setProperty("--_scale", "1.04");
+      });
+
+      wrap.addEventListener("mouseleave", () => {
+        btn.style.setProperty("--_tx", "0px");
+        btn.style.setProperty("--_ty", "0px");
+        btn.style.setProperty("--_sx", "0px");
+        btn.style.setProperty("--_sy", "0px");
+        btn.style.setProperty("--_scale", "1");
+      });
+    });
+  }
+
+  document.addEventListener("astro:page-load", init);
+</script>
+
+<style>
+  .lift-wrap {
+    display: inline-flex;
+  }
+
+  .lift-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 10rem;
+    padding-inline: var(--space-6);
+    padding-block: var(--space-3);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transform: translate(var(--_tx, 0px), var(--_ty, 0px)) scale(var(--_scale, 1));
+    transition:
+      color 0.08s ease,
+      background-color 0.08s ease,
+      box-shadow 0.15s ease,
+      transform 0.15s ease;
+  }
+
+  .lift-btn--primary {
+    background-color: var(--color-action-primary);
+    color: var(--color-text-inverse);
+    position: relative;
+  }
+
+  .lift-btn--primary::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    translate: var(--_sx, 0px) var(--_sy, 0px);
+    border: 2px solid var(--neutral-900);
+    z-index: -1;
+    transition: translate 0.15s ease;
+  }
+
+  .lift-btn--primary:hover {
+    background-color: var(--color-action-primary);
+    color: var(--color-text-inverse);
+    text-decoration: none;
+  }
+
+  .lift-btn--secondary {
+    color: var(--color-text-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
+    box-shadow: var(--_sx, 0px) var(--_sy, 0px) 0 var(--neutral-900);
+  }
+
+  .lift-btn--secondary:hover {
+    color: var(--color-text-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lift-btn {
+      transition: none;
+    }
+
+    .lift-btn--primary::after {
+      transition: none;
+    }
+  }
+</style>

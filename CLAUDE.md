@@ -40,6 +40,10 @@ Plan > Verify inputs > Execute with progress tracking > Explain changes > Docume
 - Look up docs before implementing (Context7 or official docs).
 - No borders or dividers. Whitespace separates sections, not lines.
 
+## Scripts
+
+- Always wrap script logic in a function and register it with `document.addEventListener("astro:page-load", init)` — the project uses Astro's ClientRouter, so scripts must reinitialise on every client-side navigation.
+
 ## Design Tokens
 
 All tokens live in `src/styles/tokens.css`. Follow the three-level hierarchy:

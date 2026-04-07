@@ -148,6 +148,10 @@ a:hover {
   overflow: clip;
 }
 
+.site-footer__marquee {
+  overflow: clip;
+}
+
 .site-footer__wordmark {
   width: max-content;
   margin-left: calc(var(--space-container-x) * -1.5);
@@ -159,6 +163,13 @@ a:hover {
   text-transform: uppercase;
   color: var(--color-text-primary);
   white-space: nowrap;
+}
+
+.site-footer__letter {
+  display: inline-block;
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  will-change: transform, opacity;
 }
 
 .site-footer__meta {
@@ -194,6 +205,13 @@ a:hover {
     gap: var(--space-3);
     flex-wrap: wrap;
     padding-top: var(--space-2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-footer__letter {
+    opacity: 1;
+    transform: none;
   }
 }
 
