@@ -40,7 +40,7 @@ const featuredProjects = [
 const archiveProjects = [
   {
     name: "Palma",
-    type: "Design",
+    type: "Branding",
     year: "2024",
   },
   {
@@ -189,19 +189,19 @@ const archiveProjects = [
     top: 50%;
     width: var(--space-2);
     height: var(--border-width-2);
-    background-color: var(--neutral-900);
+    background-color: var(--color-text-primary);
     opacity: 0;
     transform: translateY(-50%);
     transition:
-      opacity 0.18s ease,
-      width 0.18s var(--motion-ease-decelerate);
+      opacity 0.2s ease-out,
+      width 0.2s var(--motion-ease-decelerate);
   }
 
   .work-item-featured .project-name,
   .work-item-featured .project-meta {
     transition:
-      color 0.18s ease,
-      opacity 0.18s ease;
+      color 0.2s ease-out,
+      opacity 0.2s ease-out;
   }
 
   .work-item-featured:focus-within::before {

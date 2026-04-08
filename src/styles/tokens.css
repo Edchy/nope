@@ -20,9 +20,9 @@
   --neutral-950: #080808;
   --neutral-warm-600: oklch(0.5 0.012 70);
 
-  --experimental-1: #8233ff;
-  --experimental-2: #01ff02;
-  --experimental-3: oklch(0.85 0.08 125);
+  --experimental-1: #7c2bdd;
+  --experimental-2: #00d900;
+  --experimental-3: oklch(0.75 0.1 125);
 
   /* Spacing primitives */
   --space-1: 4px;

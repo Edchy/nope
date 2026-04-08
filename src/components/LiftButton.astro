@@ -99,6 +99,7 @@ const { href, variant = "primary", max = 20, experimentalTextColor = false } =
     align-items: center;
     justify-content: center;
     min-width: 10rem;
+    min-height: 44px;
     padding-inline: var(--space-6);
     padding-block: var(--space-3);
     font-size: var(--font-size-sm);
@@ -155,6 +156,11 @@ const { href, variant = "primary", max = 20, experimentalTextColor = false } =
     box-shadow: var(--_sx, 0px) var(--_sy, 0px) 0 var(--color-text-primary);
   }
 
+  .lift-btn--secondary:focus-visible {
+    outline: 3px solid var(--color-action-primary);
+    outline-offset: 2px;
+  }
+
   @media (hover: hover) and (pointer: fine) {
     .lift-btn--primary:hover {
       background-color: var(--color-action-primary);
@@ -172,7 +178,11 @@ const { href, variant = "primary", max = 20, experimentalTextColor = false } =
       color: var(--color-text-primary);
       text-decoration: underline;
       text-underline-offset: 0.2em;
-      text-decoration-thickness: 1px;
+      text-decoration-thickness: 2px;
+    }
+
+    .lift-btn--secondary:hover {
+      opacity: 0.85;
     }
   }
 

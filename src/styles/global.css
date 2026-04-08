@@ -86,6 +86,7 @@ video {
 *:focus-visible {
   outline: 3px solid var(--color-action-primary);
   outline-offset: 2px;
+  border-radius: 2px;
 }
 
 a {
@@ -205,6 +206,13 @@ a {
 
 .site-footer__copy a {
   color: inherit;
+  transition: opacity 0.15s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .site-footer__copy a:hover {
+    opacity: 0.75;
+  }
 }
 
 .site-footer__copy:first-child {
