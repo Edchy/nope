@@ -51,17 +51,16 @@ const footerLetters = [...footerWordmark];
       ".site-footer__letter",
     );
 
-    if (
-      !footerShell ||
-      !footerLetters?.length ||
-      footerShell.dataset.footerReady === "true"
-    ) {
+    if (!footerShell || !footerLetters?.length || footerShell.dataset.footerReady === "true") {
       return;
     }
 
     footerShell.dataset.footerReady = "true";
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (
+      sessionStorage.getItem("footer-revealed") === "true" ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
       footerShell.dataset.footerVisible = "true";
       return;
     }
@@ -92,6 +91,7 @@ const footerLetters = [...footerWordmark];
       }
 
       footerShell!.dataset.footerVisible = "true";
+      sessionStorage.setItem("footer-revealed", "true");
 
       footerLetters!.forEach((letter, index) => {
         letter.animate(
