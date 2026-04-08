@@ -204,13 +204,11 @@ const archiveProjects = [
       opacity 0.18s ease;
   }
 
-  .work-item-featured:hover::before,
   .work-item-featured:focus-within::before {
     width: var(--space-6);
     opacity: 1;
   }
 
-  .work-item-featured:hover .project-name,
   .work-item-featured:focus-visible .project-name {
     color: color-mix(
       in srgb,
@@ -219,9 +217,27 @@ const archiveProjects = [
     );
   }
 
-  .work-item-featured:hover .project-meta,
   .work-item-featured:focus-visible .project-meta {
     opacity: 1;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .work-item-featured:hover::before {
+      width: var(--space-6);
+      opacity: 1;
+    }
+
+    .work-item-featured:hover .project-name {
+      color: color-mix(
+        in srgb,
+        var(--color-text-primary) 82%,
+        var(--neutral-500)
+      );
+    }
+
+    .work-item-featured:hover .project-meta {
+      opacity: 1;
+    }
   }
 
   .work-item-main {
@@ -235,7 +251,10 @@ const archiveProjects = [
   }
 
   .work-item-link {
+    display: block;
     width: 100%;
+    text-decoration: none;
+    color: inherit;
   }
 
   .work-item-archive {
@@ -322,40 +341,44 @@ const archiveProjects = [
     padding-top: 2px;
   }
 
-  @media (max-width: 640px) {
-    .page-grid {
-      grid-template-columns: 1fr;
-    }
-
+  @media (max-width: 768px) {
     .page-title,
     .work-list,
     .work-section {
-      grid-column: 1;
+      grid-column: 1 / -1;
     }
 
-    .page-title {
-      margin-bottom: var(--space-6);
+    .work-section {
+      display: grid;
+      row-gap: var(--space-4);
+      width: min(100%, 42rem);
+      margin-inline: auto;
     }
 
     .work-section-archive {
-      margin-top: var(--space-12);
+      margin-top: var(--space-10);
     }
 
     .section-intro {
       max-width: none;
+      margin-bottom: var(--space-4);
+    }
+
+    .work-list {
+      gap: var(--space-6);
     }
 
     .work-item {
       align-items: flex-start;
       flex-direction: column;
-      gap: var(--space-3);
+      gap: var(--space-2);
     }
 
     .work-item-main {
       width: 100%;
       align-items: flex-start;
       flex-direction: column;
-      gap: var(--space-1);
+      gap: var(--space-2);
     }
 
     .project-name {
@@ -367,7 +390,22 @@ const archiveProjects = [
     }
 
     .project-meta {
-      gap: var(--space-4);
+      gap: var(--space-3);
+    }
+
+    .project-type,
+    .project-year {
+      min-width: 0;
+      text-align: left;
+    }
+
+    .work-item-featured {
+      cursor: default;
+      user-select: auto;
+    }
+
+    .work-item-featured::before {
+      display: none;
     }
 
     .preview {
@@ -378,6 +416,10 @@ const archiveProjects = [
 
 <script>
   let cleanupWorkPreview: (() => void) | undefined;
+
+  const canUseDesktopPreview = () =>
+    window.matchMedia("(min-width: 769px)").matches &&
+    window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
   function initWorkPreview() {
     cleanupWorkPreview?.();
@@ -392,6 +434,12 @@ const archiveProjects = [
     const desc = document.getElementById("preview-desc");
 
     if (!items.length || !preview || !img) {
+      cleanupWorkPreview = undefined;
+      return;
+    }
+
+    if (!canUseDesktopPreview()) {
+      preview.classList.remove("visible");
       cleanupWorkPreview = undefined;
       return;
     }

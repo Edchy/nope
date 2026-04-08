@@ -15,7 +15,22 @@ import LiftButton from "../components/LiftButton.astro";
             <span
               class="hero__title-word hero__title-word--human"
               style="--word-index: 0"
-            ><span class="hero__title-letter" style="--letter-rotate: -5deg; --letter-skew: -3deg">H</span><span class="hero__title-letter" style="--letter-rotate: 4deg; --letter-skew: 4deg">u</span><span class="hero__title-letter" style="--letter-rotate: -3deg; --letter-skew: 2deg">m</span><span class="hero__title-letter hero__title-letter--wiggle" style="--letter-rotate: 6deg; --letter-skew: -4deg">a</span><span class="hero__title-letter" style="--letter-rotate: -4deg; --letter-skew: 3deg">n</span><span class="hero__title-dot">.</span>
+              ><span
+                class="hero__title-letter"
+                style="--letter-rotate: -5deg; --letter-skew: -3deg">H</span
+              ><span
+                class="hero__title-letter"
+                style="--letter-rotate: 4deg; --letter-skew: 4deg">u</span
+              ><span
+                class="hero__title-letter"
+                style="--letter-rotate: -3deg; --letter-skew: 2deg">m</span
+              ><span
+                class="hero__title-letter hero__title-letter--wiggle"
+                style="--letter-rotate: 6deg; --letter-skew: -4deg">a</span
+              ><span
+                class="hero__title-letter"
+                style="--letter-rotate: -4deg; --letter-skew: 3deg">n</span
+              ><span class="hero__title-dot">.</span>
             </span>
             <span
               class="hero__title-word hero__title-word--minimal"
@@ -27,7 +42,22 @@ import LiftButton from "../components/LiftButton.astro";
               class="hero__title-word hero__title-word--deliberate"
               style="--word-index: 2"
             >
-<span class="hero__deliberate-letter" style="--i:0">D</span><span class="hero__deliberate-letter" style="--i:1">e</span><span class="hero__deliberate-letter" style="--i:2">l</span><span class="hero__deliberate-letter" style="--i:3">i</span><span class="hero__deliberate-letter" style="--i:4">b</span><span class="hero__deliberate-letter" style="--i:5">e</span><span class="hero__deliberate-letter" style="--i:6">r</span><span class="hero__deliberate-letter" style="--i:7">a</span><span class="hero__deliberate-letter" style="--i:8">t</span><span class="hero__deliberate-letter" style="--i:9">e</span><span class="hero__title-dot">.</span>
+              <span class="hero__deliberate-letter" style="--i:0">D</span><span
+                class="hero__deliberate-letter"
+                style="--i:1">e</span
+              ><span class="hero__deliberate-letter" style="--i:2">l</span><span
+                class="hero__deliberate-letter"
+                style="--i:3">i</span
+              ><span class="hero__deliberate-letter" style="--i:4">b</span><span
+                class="hero__deliberate-letter"
+                style="--i:5">e</span
+              ><span class="hero__deliberate-letter" style="--i:6">r</span><span
+                class="hero__deliberate-letter"
+                style="--i:7">a</span
+              ><span class="hero__deliberate-letter" style="--i:8">t</span><span
+                class="hero__deliberate-letter"
+                style="--i:9">e</span
+              ><span class="hero__title-dot">.</span>
             </span>
           </h1>
           <p class="hero__summary">
@@ -52,7 +82,6 @@ import LiftButton from "../components/LiftButton.astro";
     </div>
   </section>
 </BaseLayout>
-
 
 <style>
   .hero {
@@ -104,19 +133,17 @@ import LiftButton from "../components/LiftButton.astro";
     display: block;
     --hero-title-word-weight: var(--font-weight-bold);
     --hero-title-word-hover-weight: var(--font-weight-bold);
-    --hero-title-word-transition-duration:
-      var(--motion-duration-hero-weight-shift);
+    --hero-title-word-transition-duration: var(
+      --motion-duration-hero-weight-shift
+    );
     --hero-title-word-transition-ease: var(--motion-ease-hero-weight-shift);
     min-inline-size: var(--hero-title-word-min-width, auto);
     font-variation-settings: "wght" var(--hero-title-word-weight);
-    animation:
-      hero-word-in
-      var(--motion-duration-hero-reveal)
+    animation: hero-word-in var(--motion-duration-hero-reveal)
       calc(var(--word-index) * var(--hero-word-stagger))
-      var(--motion-ease-footer-spring)
-      both;
-    transition:
-      font-variation-settings var(--hero-title-word-transition-duration)
+      var(--motion-ease-footer-spring) both;
+    transition: font-variation-settings
+      var(--hero-title-word-transition-duration)
       var(--hero-title-word-transition-ease);
   }
 
@@ -136,8 +163,9 @@ import LiftButton from "../components/LiftButton.astro";
   }
 
   .hero__title-word--deliberate {
-    --hero-title-word-transition-duration:
-      var(--motion-duration-hero-deliberate);
+    --hero-title-word-transition-duration: var(
+      --motion-duration-hero-deliberate
+    );
     --hero-title-word-transition-ease: var(--motion-ease-hero-deliberate);
     --hero-title-word-min-width: 10ch;
     cursor: inherit;
@@ -154,17 +182,28 @@ import LiftButton from "../components/LiftButton.astro";
   }
 
   @keyframes letter-wiggle {
-    0%   { transform: rotate(6deg) skewX(-4deg) translateY(0.15em); }
-    25%  { transform: rotate(-7deg) skewX(5deg) translateY(0.2em); }
-    50%  { transform: rotate(8deg) skewX(-3deg) translateY(0.15em); }
-    75%  { transform: rotate(-5deg) skewX(4deg) translateY(0.18em); }
-    100% { transform: rotate(6deg) skewX(-4deg) translateY(0.15em); }
+    0% {
+      transform: rotate(6deg) skewX(-4deg) translateY(0.15em);
+    }
+    25% {
+      transform: rotate(-7deg) skewX(5deg) translateY(0.2em);
+    }
+    50% {
+      transform: rotate(8deg) skewX(-3deg) translateY(0.15em);
+    }
+    75% {
+      transform: rotate(-5deg) skewX(4deg) translateY(0.18em);
+    }
+    100% {
+      transform: rotate(6deg) skewX(-4deg) translateY(0.15em);
+    }
   }
 
   .hero__deliberate-letter {
     display: inline-block;
     font-variation-settings: "wght" var(--font-weight-bold);
-    transition: font-variation-settings 0.2s var(--motion-ease-hero-deliberate) calc(var(--i) * 40ms);
+    transition: font-variation-settings 0.2s var(--motion-ease-hero-deliberate)
+      calc(var(--i) * 40ms);
   }
 
   @media (hover: hover) and (pointer: fine) {
@@ -175,7 +214,8 @@ import LiftButton from "../components/LiftButton.astro";
 
   .hero__title-letter {
     display: inline-block;
-    transition: transform var(--motion-duration-hero-human) var(--motion-ease-hero-human);
+    transition: transform var(--motion-duration-hero-human)
+      var(--motion-ease-hero-human);
   }
 
   @media (hover: hover) and (pointer: fine) {
@@ -236,68 +276,116 @@ import LiftButton from "../components/LiftButton.astro";
     padding-top: var(--space-2);
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 768px) {
     .hero {
-      min-height: auto;
+      min-height: 100dvh;
     }
 
     .hero__grid {
-      min-height: auto;
+      min-height: 100%;
       grid-template-rows: auto;
       row-gap: var(--space-6);
       padding-top: var(--space-8);
       padding-bottom: var(--space-10);
     }
 
-    .hero__eyebrow,
-    .hero__copy,
-    .hero__actions {
+    .hero__copy {
       grid-column: 1 / -1;
       grid-row: auto;
       justify-self: stretch;
       align-self: auto;
+      width: min(100%, 34rem);
+      margin-inline: auto;
     }
 
     .hero__title {
       max-width: 11ch;
       font-size: clamp(3rem, 15vw, 4.5rem);
+      text-indent: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .hero__title-word {
+      min-inline-size: 0;
+    }
+
+    .hero__summary {
+      overflow-wrap: anywhere;
     }
 
     .hero__actions {
       justify-content: flex-start;
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-3);
     }
   }
 </style>
 
 <script>
+  let cleanupHeroWordHover: (() => void) | undefined;
+
   function init() {
+    cleanupHeroWordHover?.();
+
     const word = document.querySelector(".hero__title-word--human");
-    if (!word) return;
+    if (!word) {
+      cleanupHeroWordHover = undefined;
+      return;
+    }
 
-    const wiggleLetter = word.querySelector(".hero__title-letter--wiggle") as HTMLElement | null;
-
-    word.addEventListener("mouseenter", () => {
-      if (wiggleLetter) wiggleLetter.style.transform = "";
-      word.classList.add("is-hovered");
-    });
-
-    word.addEventListener("mouseleave", () => {
-      if (wiggleLetter) {
-        // Snapshot current animated position so transition starts from here
-        const current = getComputedStyle(wiggleLetter).transform;
-        wiggleLetter.style.transform = current;
-        // Force reflow so the browser registers the inline style
-        wiggleLetter.offsetWidth;
-      }
+    const canUseHoverInteractions =
+      window.matchMedia("(min-width: 769px)").matches &&
+      window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    if (!canUseHoverInteractions) {
       word.classList.remove("is-hovered");
-      if (wiggleLetter) {
-        // Clear inline style after a tick so the transition runs to the CSS default
-        requestAnimationFrame(() => {
-          wiggleLetter.style.transform = "";
-        });
-      }
-    });
+      cleanupHeroWordHover = undefined;
+      return;
+    }
+
+    const wiggleLetter = word.querySelector(
+      ".hero__title-letter--wiggle",
+    ) as HTMLElement | null;
+    const controller = new AbortController();
+    const { signal } = controller;
+
+    word.addEventListener(
+      "mouseenter",
+      () => {
+        if (wiggleLetter) wiggleLetter.style.transform = "";
+        word.classList.add("is-hovered");
+      },
+      { signal },
+    );
+
+    word.addEventListener(
+      "mouseleave",
+      () => {
+        if (wiggleLetter) {
+          // Snapshot current animated position so transition starts from here
+          const current = getComputedStyle(wiggleLetter).transform;
+          wiggleLetter.style.transform = current;
+          // Force reflow so the browser registers the inline style
+          wiggleLetter.offsetWidth;
+        }
+        word.classList.remove("is-hovered");
+        if (wiggleLetter) {
+          // Clear inline style after a tick so the transition runs to the CSS default
+          requestAnimationFrame(() => {
+            wiggleLetter.style.transform = "";
+          });
+        }
+      },
+      { signal },
+    );
+
+    cleanupHeroWordHover = () => {
+      controller.abort();
+      word.classList.remove("is-hovered");
+      if (wiggleLetter) wiggleLetter.style.transform = "";
+    };
   }
 
   document.addEventListener("astro:page-load", init);
+  init();
 </script>

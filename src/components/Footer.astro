@@ -24,8 +24,7 @@ const footerLetters = [...footerWordmark];
     </div>
     <div class="site-footer__meta" aria-label="Footer details">
       <p class="site-footer__copy">
-        <a href="mailto:hello@nope.digital">hello@nope.digital</a> &dagger; Järna
-        &dagger; Stockholm &dagger; Sweden
+        <a href="mailto:hello@nope.digital">hello@nope.digital</a>
       </p>
       <p class="site-footer__copy site-footer__copy--center">
         © {year}
@@ -51,7 +50,11 @@ const footerLetters = [...footerWordmark];
       ".site-footer__letter",
     );
 
-    if (!footerShell || !footerLetters?.length || footerShell.dataset.footerReady === "true") {
+    if (
+      !footerShell ||
+      !footerLetters?.length ||
+      footerShell.dataset.footerReady === "true"
+    ) {
       return;
     }
 
@@ -59,8 +62,13 @@ const footerLetters = [...footerWordmark];
 
     if (
       sessionStorage.getItem("footer-revealed") === "true" ||
+      window.matchMedia("(max-width: 768px)").matches ||
       window.matchMedia("(prefers-reduced-motion: reduce)").matches
     ) {
+      footerLetters.forEach((letter) => {
+        letter.style.opacity = "1";
+        letter.style.transform = "none";
+      });
       footerShell.dataset.footerVisible = "true";
       return;
     }

@@ -139,46 +139,38 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     }
 
     @media (max-width: 768px) {
-      .about-chunk-1,
-      .about-chunk-2,
-      .about-chunk-3,
-      .about-chunk-4 {
-        grid-column: 2 / 12;
-      }
-
-      .about-chunk-2,
-      .about-chunk-3,
-      .about-chunk-4 {
-        margin-top: var(--space-10);
-      }
-    }
-
-    @media (max-width: 640px) {
       .page-grid {
-        grid-template-columns: 1fr;
+        row-gap: var(--space-8);
       }
 
+      .page-title,
       .about-chunk-1,
       .about-chunk-2,
       .about-chunk-3,
       .about-chunk-4 {
-        grid-column: 1;
+        grid-column: 1 / -1;
+        grid-row: auto;
+        padding-block: 0;
+        width: min(100%, 42rem);
+        margin-inline: auto;
       }
 
-      .about-chunk-2 {
+      .about-chunk-2,
+      .about-chunk-3,
+      .about-chunk-4 {
+        margin-top: 0;
+        text-align: left;
+      }
+
+      .signature {
         margin-top: var(--space-6);
       }
 
-      .about-chunk-3 {
-        margin-top: var(--space-8);
-      }
-
-      .about-chunk-4 {
-        margin-top: var(--space-8);
-      }
-
-      .page-title {
-        margin-bottom: var(--space-6);
+      .about-chunk-1 p,
+      .about-chunk-2 p,
+      .about-chunk-3 p,
+      .about-chunk-4 p {
+        overflow-wrap: anywhere;
       }
     }
   </style>
