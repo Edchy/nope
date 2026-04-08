@@ -379,9 +379,16 @@ const currentPath = Astro.url.pathname;
 
       trigger.addEventListener("click", toggle, { signal });
 
-      // Close on link click
+      // Close instantly on link click (no transition — let the page transition take over)
       nav.querySelectorAll<HTMLAnchorElement>(".site-header__link").forEach((link) => {
-        link.addEventListener("click", close, { signal });
+        link.addEventListener("click", () => {
+          nav!.style.transition = "none";
+          close();
+          // Restore transition after the next paint so re-opening still animates
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => { nav!.style.transition = ""; });
+          });
+        }, { signal });
       });
 
       // Close on Escape

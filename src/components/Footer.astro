@@ -65,10 +65,7 @@ const footerLetters = [...footerWordmark];
       window.matchMedia("(max-width: 768px)").matches ||
       window.matchMedia("(prefers-reduced-motion: reduce)").matches
     ) {
-      footerLetters.forEach((letter) => {
-        letter.style.opacity = "1";
-        letter.style.transform = "none";
-      });
+      // Leave letters at their CSS default (opacity: 1) — don't touch inline styles
       footerShell.dataset.footerVisible = "true";
       return;
     }
