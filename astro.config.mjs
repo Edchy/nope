@@ -1,6 +1,14 @@
 import { defineConfig, fontProviders } from "astro/config";
 
 export default defineConfig({
+  vite: {
+    server: {
+      watch: {
+        usePolling: true,
+        interval: 100,
+      },
+    },
+  },
   fonts: [
     {
       name: "Jost",
