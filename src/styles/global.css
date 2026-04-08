@@ -16,7 +16,6 @@ html {
 
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
-  overflow-x: hidden;
   overflow-x: clip;
 }
 
@@ -39,7 +38,6 @@ body {
   flex-direction: column;
   position: relative;
   isolation: isolate;
-  overflow-x: hidden;
   overflow-x: clip;
 }
 
@@ -83,6 +81,11 @@ img,
 video {
   max-width: 100%;
   display: block;
+}
+
+*:focus-visible {
+  outline: 3px solid var(--color-action-primary);
+  outline-offset: 2px;
 }
 
 a {
@@ -182,7 +185,6 @@ a {
   display: inline-block;
   opacity: 1;
   transform: translate3d(0, 0, 0);
-  will-change: transform, opacity;
 }
 
 .site-footer__meta {

@@ -99,7 +99,8 @@ const footerLetters = [...footerWordmark];
       sessionStorage.setItem("footer-revealed", "true");
 
       footerLetters!.forEach((letter, index) => {
-        letter.animate(
+        letter.style.willChange = "transform, opacity";
+        const animation = letter.animate(
           [
             {
               opacity: 0,
@@ -129,6 +130,9 @@ const footerLetters = [...footerWordmark];
             fill: "forwards",
           },
         );
+        animation.onfinish = () => {
+          letter.style.willChange = "auto";
+        };
       });
     }
 
