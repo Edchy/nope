@@ -241,7 +241,7 @@ a:hover {
 ::-webkit-scrollbar-thumb {
   border-radius: 9999px;
   border: 0.125rem solid transparent;
-  background-color: var(--neutral-900);
+  background-color: var(--scrollbar-thumb-color);
   background-clip: padding-box;
   min-height: 2.5rem;
 }

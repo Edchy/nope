@@ -65,9 +65,12 @@
   ); /* Hero/footer wordmark — intentionally outside step scale */
 
   --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+  --font-weight-thin: 100;
   --font-weight-bold: 700;
+  --font-weight-black: 900;
 
-  --line-height-display: 0.85;
+  --line-height-display: 0.9;
   --line-height-tight: 1.25;
   --line-height-snug: 1.375;
   --line-height-normal: 1.5;
@@ -93,13 +96,22 @@
 
   /* Text */
   --color-text-primary: var(--neutral-900);
-  --color-text-secondary: color-mix(in oklch, var(--color-text-primary) 45%, var(--color-background));
-  --color-text-disabled: color-mix(in oklch, var(--color-text-primary) 25%, var(--color-background));
+  --color-text-secondary: color-mix(
+    in oklch,
+    var(--color-text-primary) 45%,
+    var(--color-background)
+  );
+  --color-text-disabled: color-mix(
+    in oklch,
+    var(--color-text-primary) 25%,
+    var(--color-background)
+  );
   --color-text-inverse: var(--neutral-50);
 
   /* Actions */
   --color-action-primary: var(--neutral-900);
   --color-action-primary-hover: var(--neutral-700);
+  --color-accent-experimental: var(--experimental-1);
 
   /* Borders */
   --color-border-default: color-mix(
@@ -125,11 +137,23 @@
   /* Motion */
   --motion-duration-page-transition: 0.55s;
   --motion-duration-footer-reveal: 0.9s;
+  --motion-duration-hero-weight-shift: 0.45s;
+  --motion-duration-hero-human: 0.3s;
+  --motion-duration-hero-minimal: 0.15s;
+  --motion-duration-hero-deliberate: 0.6s;
   --motion-ease-decelerate: cubic-bezier(0.19, 1, 0.22, 1);
+  --motion-ease-hero-human: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --motion-ease-hero-minimal: cubic-bezier(0.76, 0, 0.24, 1);
+  --motion-ease-hero-deliberate: cubic-bezier(0.45, 0, 0.2, 1);
+  --motion-ease-hero-weight-shift: cubic-bezier(0.76, 0, 0.24, 1);
   --motion-ease-footer-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
   /* Font families */
   --font-family-base: var(--font-jost);
+
+  /* Hero */
+  --hero-word-stagger: 80ms;
+  --motion-duration-hero-reveal: 0.7s;
 
   /* Footer */
   --footer-letter-stagger: 52ms;
@@ -141,10 +165,17 @@
    ------------------------------------------------------------ */
 :root {
   --button-theme-toggle-color: var(--experimental-2);
+  --scrollbar-thumb-color: var(--experimental-1);
 }
 
 [data-theme="experimental"] {
   --color-background: var(--experimental-1);
   --color-text-primary: var(--experimental-2);
-  --button-theme-toggle-color: var(--neutral-900);
+  --color-text-secondary: color-mix(
+    in oklch,
+    var(--color-text-primary) 45%,
+    oklch(from var(--experimental-1) calc(l - 0.15) c h)
+  );
+  --button-theme-toggle-color: var(--neutral-100);
+  --scrollbar-thumb-color: var(--experimental-2);
 }

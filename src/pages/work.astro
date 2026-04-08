@@ -177,8 +177,24 @@ const archiveProjects = [
   }
 
   .work-item-featured {
+    position: relative;
     cursor: crosshair;
     user-select: none;
+  }
+
+  .work-item-featured::before {
+    content: "";
+    position: absolute;
+    left: calc(var(--space-8) * -1);
+    top: 50%;
+    width: var(--space-2);
+    height: var(--border-width-2);
+    background-color: var(--neutral-900);
+    opacity: 0;
+    transform: translateY(-50%);
+    transition:
+      opacity 0.18s ease,
+      width 0.18s var(--motion-ease-decelerate);
   }
 
   .work-item-featured .project-name,
@@ -186,6 +202,12 @@ const archiveProjects = [
     transition:
       color 0.18s ease,
       opacity 0.18s ease;
+  }
+
+  .work-item-featured:hover::before,
+  .work-item-featured:focus-within::before {
+    width: var(--space-6);
+    opacity: 1;
   }
 
   .work-item-featured:hover .project-name,
@@ -255,6 +277,7 @@ const archiveProjects = [
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .work-item-featured::before,
     .work-item-featured .project-name,
     .work-item-featured .project-meta {
       transition: none;

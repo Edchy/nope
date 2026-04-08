@@ -14,7 +14,7 @@ const currentPath = Astro.url.pathname;
   <div class="site-header__shell layout-shell">
     <div class="site-header__grid layout-grid">
       <a href="/" class="site-header__logo" aria-label={`${SITE_TITLE} home`}
-        >{SITE_TITLE} STUDIO.</a
+        >{SITE_TITLE} STUDIO<span class="site-header__logo-dot">.</span></a
       >
       <nav class="site-header__nav" aria-label="Main navigation">
         <ul class="site-header__links">
@@ -78,6 +78,10 @@ const currentPath = Astro.url.pathname;
   .site-header__logo:hover {
     color: var(--color-text-primary);
     text-decoration: none;
+  }
+
+  .site-header__logo-dot {
+    color: var(--color-accent-experimental);
   }
 
   /* Nav: columns 7–12, right-aligned */

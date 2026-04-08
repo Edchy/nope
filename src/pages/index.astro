@@ -11,7 +11,26 @@ import LiftButton from "../components/LiftButton.astro";
     <div class="hero__shell layout-shell">
       <div class="hero__grid layout-grid">
         <div class="hero__copy">
-          <h1 class="hero__title">Human. Minimal. Deliberate.</h1>
+          <h1 class="hero__title">
+            <span
+              class="hero__title-word hero__title-word--human"
+              style="--word-index: 0"
+            >
+              Human<span class="hero__title-dot">.</span>
+            </span>
+            <span
+              class="hero__title-word hero__title-word--minimal"
+              style="--word-index: 1"
+            >
+              Minimal<span class="hero__title-dot">.</span>
+            </span>
+            <span
+              class="hero__title-word hero__title-word--deliberate"
+              style="--word-index: 2"
+            >
+              Deliberate<span class="hero__title-dot">.</span>
+            </span>
+          </h1>
           <p class="hero__summary">
             Websites. Apps. Design. <br />
             Not sure what you need yet. <br />
@@ -28,6 +47,7 @@ import LiftButton from "../components/LiftButton.astro";
     </div>
   </section>
 </BaseLayout>
+
 
 <style>
   .hero {
@@ -62,12 +82,88 @@ import LiftButton from "../components/LiftButton.astro";
     align-content: start;
   }
 
+  @keyframes hero-word-in {
+    from {
+      opacity: 0;
+      translate: 0 0.4em;
+      scale: 0.92;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+      scale: 1;
+    }
+  }
+
+  .hero__title-word {
+    display: inline-block;
+    --hero-title-word-weight: var(--font-weight-bold);
+    --hero-title-word-hover-weight: var(--font-weight-bold);
+    --hero-title-word-transition-duration:
+      var(--motion-duration-hero-weight-shift);
+    --hero-title-word-transition-ease: var(--motion-ease-hero-weight-shift);
+    min-inline-size: var(--hero-title-word-min-width, auto);
+    font-variation-settings: "wght" var(--hero-title-word-weight);
+    animation:
+      hero-word-in
+      var(--motion-duration-hero-reveal)
+      calc(var(--word-index) * var(--hero-word-stagger))
+      var(--motion-ease-footer-spring)
+      both;
+    transition:
+      font-variation-settings var(--hero-title-word-transition-duration)
+      var(--hero-title-word-transition-ease);
+  }
+
+  .hero__title-word--human {
+    --hero-title-word-hover-weight: var(--font-weight-semibold);
+    --hero-title-word-transition-duration: var(--motion-duration-hero-human);
+    --hero-title-word-transition-ease: var(--motion-ease-hero-human);
+    --hero-title-word-min-width: 5.2ch;
+    cursor: default;
+  }
+
+  .hero__title-word--minimal {
+    --hero-title-word-hover-weight: var(--font-weight-thin);
+    --hero-title-word-transition-duration: var(--motion-duration-hero-minimal);
+    --hero-title-word-transition-ease: var(--motion-ease-hero-minimal);
+    --hero-title-word-min-width: 7.4ch;
+    cursor: default;
+  }
+
+  .hero__title-word--deliberate {
+    --hero-title-word-hover-weight: var(--font-weight-black);
+    --hero-title-word-transition-duration:
+      var(--motion-duration-hero-deliberate);
+    --hero-title-word-transition-ease: var(--motion-ease-hero-deliberate);
+    --hero-title-word-min-width: 10ch;
+    cursor: default;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .hero__title-word:hover {
+      --hero-title-word-weight: var(--hero-title-word-hover-weight);
+    }
+  }
+
+  .hero__title-dot {
+    color: var(--color-accent-experimental);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__title-word {
+      animation: none;
+      transition: none;
+    }
+  }
+
   .hero__title {
     max-width: 9ch;
     font-size: clamp(4.2rem, 8vw, 7rem);
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height-display);
-    letter-spacing: -0.06em;
+    letter-spacing: -0.03em;
+    text-indent: -0.03em;
     text-wrap: balance;
     color: var(--color-text-primary);
   }

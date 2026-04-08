@@ -30,9 +30,15 @@ const footerLetters = [...footerWordmark];
 </footer>
 
 <script>
+  declare global {
+    interface Window {
+      __footerRevealBound?: boolean;
+    }
+  }
+
   function initFooterReveal() {
-    const footerShell = document.querySelector("[data-footer-shell]");
-    const footerLetters = footerShell?.querySelectorAll(".site-footer__letter");
+    const footerShell = document.querySelector<HTMLElement>("[data-footer-shell]");
+    const footerLetters = footerShell?.querySelectorAll<HTMLElement>(".site-footer__letter");
 
     if (
       !footerShell ||
@@ -69,13 +75,13 @@ const footerLetters = [...footerWordmark];
     });
 
     function animateFooterLetters() {
-      if (footerShell.dataset.footerVisible === "true") {
+      if (footerShell!.dataset.footerVisible === "true") {
         return;
       }
 
-      footerShell.dataset.footerVisible = "true";
+      footerShell!.dataset.footerVisible = "true";
 
-      footerLetters.forEach((letter, index) => {
+      footerLetters!.forEach((letter, index) => {
         letter.animate(
           [
             {
