@@ -23,7 +23,14 @@ const footerLetters = [...footerWordmark];
       </p>
     </div>
     <div class="site-footer__meta" aria-label="Footer details">
-      <p class="site-footer__copy">© {year} {SITE_TITLE}</p>
+      <p class="site-footer__copy">
+        <a href="mailto:hello@nope.digital">hello@nope.digital</a> &dagger; Järna
+        &dagger; Stockholm &dagger; Sweden
+      </p>
+      <p class="site-footer__copy site-footer__copy--center">
+        © {year}
+        {SITE_TITLE}
+      </p>
       <p class="site-footer__tagline">That'll do</p>
     </div>
   </div>
@@ -37,8 +44,12 @@ const footerLetters = [...footerWordmark];
   }
 
   function initFooterReveal() {
-    const footerShell = document.querySelector<HTMLElement>("[data-footer-shell]");
-    const footerLetters = footerShell?.querySelectorAll<HTMLElement>(".site-footer__letter");
+    const footerShell = document.querySelector<HTMLElement>(
+      "[data-footer-shell]",
+    );
+    const footerLetters = footerShell?.querySelectorAll<HTMLElement>(
+      ".site-footer__letter",
+    );
 
     if (
       !footerShell ||
@@ -64,8 +75,9 @@ const footerLetters = [...footerWordmark];
         footerStyles.getPropertyValue("--motion-duration-footer-reveal"),
       ) * 1000 || 900;
     const stagger =
-      Number.parseFloat(footerStyles.getPropertyValue("--footer-letter-stagger")) ||
-      52;
+      Number.parseFloat(
+        footerStyles.getPropertyValue("--footer-letter-stagger"),
+      ) || 52;
     const startTransform =
       "translate3d(0, var(--footer-wordmark-offset-y), 0) rotate(8deg) scale(0.9)";
 
@@ -91,12 +103,14 @@ const footerLetters = [...footerWordmark];
             {
               opacity: 1,
               offset: 0.58,
-              transform: "translate3d(0, -0.18em, 0) rotate(-2.5deg) scale(1.06)",
+              transform:
+                "translate3d(0, -0.18em, 0) rotate(-2.5deg) scale(1.06)",
             },
             {
               opacity: 1,
               offset: 0.82,
-              transform: "translate3d(0, 0.08em, 0) rotate(0.8deg) scale(0.985)",
+              transform:
+                "translate3d(0, 0.08em, 0) rotate(0.8deg) scale(0.985)",
             },
             {
               opacity: 1,

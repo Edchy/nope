@@ -18,9 +18,11 @@
   --neutral-800: #1a1a1a;
   --neutral-900: #0f0f0f;
   --neutral-950: #080808;
+  --neutral-warm-600: oklch(0.5 0.012 70);
 
   --experimental-1: #8233ff;
   --experimental-2: #01ff02;
+  --experimental-3: oklch(0.85 0.08 125);
 
   /* Spacing primitives */
   --space-1: 4px;
@@ -96,11 +98,7 @@
 
   /* Text */
   --color-text-primary: var(--neutral-900);
-  --color-text-secondary: color-mix(
-    in oklch,
-    var(--color-text-primary) 45%,
-    var(--color-background)
-  );
+  --color-text-secondary: var(--neutral-warm-600);
   --color-text-disabled: color-mix(
     in oklch,
     var(--color-text-primary) 25%,
@@ -116,7 +114,7 @@
   /* Borders */
   --color-border-default: color-mix(
     in oklch,
-    var(--color-background) 99%,
+    var(--color-background) 97%,
     black
   );
   --color-border-strong: color-mix(
@@ -171,11 +169,8 @@
 [data-theme="experimental"] {
   --color-background: var(--experimental-1);
   --color-text-primary: var(--experimental-2);
-  --color-text-secondary: color-mix(
-    in oklch,
-    var(--color-text-primary) 45%,
-    oklch(from var(--experimental-1) calc(l - 0.15) c h)
-  );
+  --color-text-secondary: var(--experimental-3);
+  --color-accent-experimental: var(--neutral-100);
   --button-theme-toggle-color: var(--neutral-100);
   --scrollbar-thumb-color: var(--experimental-2);
 }

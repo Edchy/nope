@@ -38,7 +38,13 @@ import LiftButton from "../components/LiftButton.astro";
           </p>
           <p class="hero__summary"></p>
           <nav class="hero__actions">
-            <LiftButton href="mailto:hello@nope.digital" variant="primary">Say hello</LiftButton>
+            <LiftButton
+              href="mailto:hello@nope.digital"
+              variant="primary"
+              experimentalTextColor={true}
+            >
+              Say hello
+            </LiftButton>
             <LiftButton href="/work" variant="secondary">See work</LiftButton>
           </nav>
         </div>

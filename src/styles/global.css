@@ -60,7 +60,6 @@ body::before {
     #000 70%,
     transparent 100%
   );
-  /*opacity: 1;*/
   background-position: fixed;
   pointer-events: none;
   z-index: -1;
@@ -161,7 +160,7 @@ a:hover {
   line-height: 0.82;
   letter-spacing: -0.08em;
   text-transform: uppercase;
-  color: var(--color-text-primary);
+  color: var(--color-accent-experimental);
   white-space: nowrap;
 }
 
@@ -173,9 +172,9 @@ a:hover {
 }
 
 .site-footer__meta {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
-  justify-content: space-between;
   gap: var(--space-4);
   padding-inline: var(--space-container-x);
   padding-top: var(--space-3);
@@ -186,6 +185,24 @@ a:hover {
   font-size: var(--font-size-xs);
   letter-spacing: 0.03em;
   color: var(--color-text-secondary);
+}
+
+.site-footer__copy a {
+  color: inherit;
+}
+
+.site-footer__copy:first-child {
+  justify-self: start;
+}
+
+.site-footer__copy--center {
+  justify-self: center;
+  text-align: center;
+}
+
+.site-footer__tagline {
+  justify-self: end;
+  text-align: right;
 }
 
 @media (max-width: 640px) {
@@ -201,6 +218,7 @@ a:hover {
   }
 
   .site-footer__meta {
+    display: flex;
     justify-content: flex-start;
     gap: var(--space-3);
     flex-wrap: wrap;

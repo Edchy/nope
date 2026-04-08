@@ -3,13 +3,18 @@ interface Props {
   href: string;
   variant?: "primary" | "secondary";
   max?: number;
+  experimentalTextColor?: boolean;
 }
 
-const { href, variant = "primary", max = 20 } = Astro.props;
+const { href, variant = "primary", max = 20, experimentalTextColor = false } =
+  Astro.props;
 ---
 
 <span class="lift-wrap" data-max={max}>
-  <a href={href} class={`lift-btn lift-btn--${variant}`}>
+  <a
+    href={href}
+    class={`lift-btn lift-btn--${variant} ${experimentalTextColor ? "lift-btn--experimental-text" : ""}`}
+  >
     <slot />
   </a>
 </span>
@@ -90,6 +95,29 @@ const { href, variant = "primary", max = 20 } = Astro.props;
     background-color: var(--color-action-primary);
     color: var(--color-text-inverse);
     text-decoration: none;
+  }
+
+  :global([data-theme="experimental"])
+    .lift-btn--primary.lift-btn--experimental-text {
+    background-color: var(--experimental-2);
+    color: var(--experimental-1);
+  }
+
+  :global([data-theme="experimental"])
+    .lift-btn--primary.lift-btn--experimental-text::after {
+    border-color: var(--experimental-2);
+  }
+
+  :global([data-theme="experimental"])
+    .lift-btn--primary.lift-btn--experimental-text:hover {
+    background-color: var(--experimental-2);
+    color: var(--experimental-1);
+  }
+
+  :global([data-theme="experimental"])
+    .lift-btn--primary.lift-btn--experimental-text:focus-visible {
+    background-color: var(--experimental-2);
+    color: var(--experimental-1);
   }
 
   .lift-btn--secondary {
