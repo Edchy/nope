@@ -84,7 +84,7 @@ const footerLetters = [...footerWordmark];
         footerStyles.getPropertyValue("--footer-letter-stagger"),
       ) || 52;
     const startTransform =
-      "translate3d(0, var(--footer-wordmark-offset-y), 0) rotate(8deg) scale(0.9)";
+      "translate3d(0, calc(var(--footer-wordmark-offset-y) * -1), 0) rotate(8deg) scale(0.9)";
 
     footerLetters.forEach((letter) => {
       letter.style.opacity = "0";
@@ -104,7 +104,7 @@ const footerLetters = [...footerWordmark];
           [
             {
               opacity: 0,
-              transform: startTransform,
+              transform: startTransform, // letters start above, clipped by overflow:clip — no scroll height impact
             },
             {
               opacity: 1,

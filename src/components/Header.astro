@@ -5,7 +5,7 @@ import { SITE_TITLE } from "../config";
 const navLinks = [
   { href: "/work", label: "Work" },
   { href: "/about", label: "Studio" },
-  { href: "#", label: "Blog", isExternal: true },
+  { href: "https://blog.nope.digital", label: "Blog", isExternal: true },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -15,7 +15,7 @@ const currentPath = Astro.url.pathname;
   <div class="site-header__shell layout-shell">
     <div class="site-header__grid layout-grid">
       <a href="/" class="site-header__logo" aria-label={`${SITE_TITLE} home`}
-        >{SITE_TITLE} STUDIO<span class="site-header__logo-dot">.</span></a
+        >{SITE_TITLE}<span class="site-header__logo-dot">.</span></a
       >
       <nav class="site-header__nav" aria-label="Main navigation">
         <ul class="site-header__links">
@@ -380,6 +380,11 @@ const currentPath = Astro.url.pathname;
     const { signal } = controller;
 
     if (trigger && nav) {
+      // Clear any inline styles left from a snap-close during navigation
+      nav.style.transition = "";
+      nav.style.opacity = "";
+      nav.style.pointerEvents = "";
+
       const header = document.querySelector<HTMLElement>(".site-header");
 
       const open = () => {
@@ -405,24 +410,21 @@ const currentPath = Astro.url.pathname;
 
       trigger.addEventListener("click", toggle, { signal });
 
-      // On link click, keep the nav visible until navigation actually starts,
-      // then snap it away so there's no flash of the current page underneath.
+      // On link click, keep the nav visible (it covers the page) until
+      // Astro has swapped in the new page content, then snap it away.
+      // This prevents a flash of the old page during the fetch delay.
       nav.querySelectorAll<HTMLAnchorElement>(".site-header__link").forEach((link) => {
         link.addEventListener("click", () => {
-          const onNavStart = () => {
+          const onAfterSwap = () => {
             nav!.style.transition = "none";
             nav!.classList.remove("is-open");
             nav!.setAttribute("aria-hidden", "true");
             trigger.setAttribute("aria-expanded", "false");
             document.body.style.overflow = "";
             if (header) header.style.zIndex = "";
-            // Restore transition after the next paint
-            requestAnimationFrame(() => {
-              requestAnimationFrame(() => { nav!.style.transition = ""; });
-            });
-            document.removeEventListener("astro:before-preparation", onNavStart);
+            document.removeEventListener("astro:after-swap", onAfterSwap);
           };
-          document.addEventListener("astro:before-preparation", onNavStart);
+          document.addEventListener("astro:after-swap", onAfterSwap);
         }, { signal });
       });
 
