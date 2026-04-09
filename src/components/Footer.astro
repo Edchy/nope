@@ -15,6 +15,7 @@ const footerLetters = [...footerWordmark];
             <span
               class="site-footer__letter"
               style={`--footer-letter-index: ${index};`}
+              aria-hidden="true"
             >
               {letter}
             </span>
@@ -99,7 +100,6 @@ const footerLetters = [...footerWordmark];
       sessionStorage.setItem("footer-revealed", "true");
 
       footerLetters!.forEach((letter, index) => {
-        letter.style.willChange = "transform, opacity";
         const animation = letter.animate(
           [
             {
@@ -130,9 +130,6 @@ const footerLetters = [...footerWordmark];
             fill: "forwards",
           },
         );
-        animation.onfinish = () => {
-          letter.style.willChange = "auto";
-        };
       });
     }
 

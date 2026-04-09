@@ -7,32 +7,36 @@ const featuredProjects = [
     name: "Bakkerij Hartog",
     type: "Website",
     year: "2025",
-    img: "eddie.avif",
+    color: "#c8b89a",
     desc: "A warm, neighbourhood bakery website with online ordering and seasonal menus.",
+    tags: ["Astro", "E-commerce", "CMS"],
     href: "#",
   },
   {
     name: "Forma Studio",
     type: "Branding",
     year: "2025",
-    img: "images/project-2.jpg",
+    color: "#b8c4bb",
     desc: "Brand identity for a minimal furniture studio — wordmark, palette, and print system.",
+    tags: ["Identity", "Print", "Art direction"],
     href: "#",
   },
   {
     name: "Kin",
     type: "App",
     year: "2024",
-    img: "images/project-3.jpg",
+    color: "#a9b8c8",
     desc: "A family coordination app for shared schedules, tasks, and household notes.",
+    tags: ["Product design", "iOS", "Figma"],
     href: "#",
   },
   {
     name: "Lund Collective",
     type: "Website",
     year: "2024",
-    img: "images/project-4.jpg",
+    color: "#c4b8c8",
     desc: "Portfolio site for a Malmö-based creative collective spanning film, photo, and design.",
+    tags: ["Astro", "Motion", "Editorial"],
     href: "#",
   },
 ];
@@ -78,10 +82,17 @@ const archiveProjects = [
         </p>
         <ul class="work-list">
           {
-            featuredProjects.map(({ name, type, year, img, desc, href }) => (
+            featuredProjects.map(({ name, type, year, color, desc, tags, href }) => (
               <li class="work-item work-item-featured">
                 <LiftSurface href={href} class="work-item-link">
-                  <span data-img={img} data-desc={desc} class="work-item-main">
+                  <span
+                    data-color={color}
+                    data-desc={desc}
+                    data-type={type}
+                    data-year={year}
+                    data-tags={tags.join(",")}
+                    class="work-item-main"
+                  >
                     <h3 class="project-name">{name}</h3>
                     <span class="project-meta">
                       <span class="project-type">{type}</span>
@@ -122,30 +133,42 @@ const archiveProjects = [
 
 <!-- Floating preview -->
 <div class="preview" id="preview">
-  <img id="preview-img" src="" alt="" />
-  <p id="preview-desc"></p>
+  <div class="preview-swatch" id="preview-swatch"></div>
+  <div class="preview-body">
+    <p class="preview-desc" id="preview-desc"></p>
+    <ul class="preview-tags" id="preview-tags"></ul>
+  </div>
 </div>
 
 <style>
-  .page-title {
+  :global([data-theme="experimental"]) .work-page {
+    --color-text-primary: var(--color-text-inverse);
+    --color-text-secondary: var(--color-text-inverse);
+    color: var(--color-text-primary);
+  }
+
+  .work-page .page-grid {
+    row-gap: var(--space-8);
+  }
+
+  .work-page .page-title {
     grid-column: 1 / 4;
+    align-self: start;
+    min-width: 0;
+    width: 100%;
+    max-width: 42rem;
+    margin-inline: auto;
+    padding-top: 0.2em;
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-regular);
     color: var(--color-text-secondary);
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    padding-top: 0.2em;
   }
 
-  .work-list {
+  .work-page .work-section {
     grid-column: 3 / 11;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-  }
-
-  .work-section {
-    grid-column: 3 / 11;
+    display: block;
   }
 
   .work-section-archive {
@@ -153,19 +176,31 @@ const archiveProjects = [
   }
 
   .section-label {
-    margin: 0 0 var(--space-2);
+    margin: 0 0 var(--space-2) 0;
     font-size: var(--font-size-xs);
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--color-text-secondary);
+    opacity: 0.65;
   }
 
   .section-intro {
     max-width: 28rem;
-    margin: 0 0 var(--space-6);
+    margin: 0 0 var(--space-8) 0;
     font-size: var(--font-size-sm);
-    line-height: var(--line-height-relaxed);
-    color: var(--color-text-secondary);
+    line-height: var(--line-height-snug);
+    color: var(--color-text-primary);
+    text-wrap: pretty;
+  }
+
+  .work-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
   .work-item {
@@ -176,78 +211,14 @@ const archiveProjects = [
     width: 100%;
   }
 
-  .work-item-featured {
-    position: relative;
-    cursor: crosshair;
-    user-select: none;
-  }
-
-  .work-item-featured::before {
-    content: "";
-    position: absolute;
-    left: calc(var(--space-8) * -1);
-    top: 50%;
-    width: var(--space-2);
-    height: var(--border-width-2);
-    background-color: var(--color-text-primary);
-    opacity: 0;
-    transform: translateY(-50%);
-    transition:
-      opacity 0.2s ease-out,
-      width 0.2s var(--motion-ease-decelerate);
-  }
-
-  .work-item-featured .project-name,
-  .work-item-featured .project-meta {
-    transition:
-      color 0.2s ease-out,
-      opacity 0.2s ease-out;
-  }
-
-  .work-item-featured:focus-within::before {
-    width: var(--space-6);
-    opacity: 1;
-  }
-
-  .work-item-featured:focus-visible .project-name {
-    color: color-mix(
-      in srgb,
-      var(--color-text-primary) 82%,
-      var(--neutral-500)
-    );
-  }
-
-  .work-item-featured:focus-visible .project-meta {
-    opacity: 1;
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    .work-item-featured:hover::before {
-      width: var(--space-6);
-      opacity: 1;
-    }
-
-    .work-item-featured:hover .project-name {
-      color: color-mix(
-        in srgb,
-        var(--color-text-primary) 82%,
-        var(--neutral-500)
-      );
-    }
-
-    .work-item-featured:hover .project-meta {
-      opacity: 1;
-    }
-  }
-
   .work-item-main {
     display: flex;
+    width: 100%;
     justify-content: space-between;
     align-items: baseline;
     gap: var(--space-6);
     flex: 1;
     min-width: 0;
-    width: 100%;
   }
 
   .work-item-link {
@@ -255,6 +226,7 @@ const archiveProjects = [
     width: 100%;
     text-decoration: none;
     color: inherit;
+    outline-offset: var(--space-2);
   }
 
   .work-item-archive {
@@ -265,7 +237,9 @@ const archiveProjects = [
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-regular);
     letter-spacing: -0.02em;
+    line-height: var(--line-height-tight);
     color: var(--color-text-primary);
+    text-wrap: pretty;
   }
 
   .work-item-archive .project-name {
@@ -277,7 +251,9 @@ const archiveProjects = [
   .project-meta {
     display: flex;
     gap: var(--space-8);
+    flex-wrap: wrap;
     align-items: baseline;
+    justify-content: flex-end;
     flex-shrink: 0;
     opacity: 0.72;
   }
@@ -295,12 +271,8 @@ const archiveProjects = [
     text-align: right;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .work-item-featured::before,
-    .work-item-featured .project-name,
-    .work-item-featured .project-meta {
-      transition: none;
-    }
+  .work-item-featured {
+    position: relative;
   }
 
   .preview {
@@ -311,112 +283,82 @@ const archiveProjects = [
     z-index: 100;
     opacity: 0;
     transition: opacity 0.18s ease;
-    transform: translate(28px, -50%);
     will-change: transform, opacity;
     display: flex;
-    align-items: flex-start;
-    gap: var(--space-4);
-    background: var(--neutral-100);
-    padding: var(--space-3);
+    align-items: stretch;
+    background: var(--color-background-surface);
+    color: var(--neutral-900);
+    width: 320px;
+    overflow: hidden;
   }
 
   .preview.visible {
-    opacity: 0.9;
+    opacity: 1;
   }
 
-  .preview img {
-    width: 240px;
-    height: 170px;
-    object-fit: cover;
-    display: block;
+  .preview-swatch {
+    width: 80px;
     flex-shrink: 0;
+    transition: background-color 0.2s ease;
   }
 
-  #preview-desc {
-    width: 160px;
-    font-size: var(--font-size-xs);
-    color: var(--color-text-secondary);
-    line-height: 1.5;
+  .preview-body {
+    flex: 1;
+    min-width: 0;
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .preview-desc {
     margin: 0;
-    padding-top: 2px;
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-relaxed);
+    color: currentColor;
+  }
+
+  .preview-tags {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    margin-top: auto;
+  }
+
+  .preview-tags li {
+    font-size: var(--font-size-xs);
+    color: currentColor;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+
+  .preview-tags li:not(:last-child)::after {
+    content: "·";
+    margin-left: var(--space-1);
+    opacity: 0.5;
   }
 
   @media (max-width: 768px) {
-    .page-title,
-    .work-list,
-    .work-section {
+    .work-page .page-title {
       grid-column: 1 / -1;
     }
 
-    .work-section {
-      display: grid;
-      row-gap: var(--space-4);
-      width: min(100%, 42rem);
-      margin-inline: auto;
-    }
-
-    .work-section-archive {
-      margin-top: var(--space-10);
+    .work-page .work-section {
+      grid-column: 1 / -1;
     }
 
     .section-intro {
       max-width: none;
-      margin-bottom: var(--space-4);
+      margin-bottom: var(--space-6);
     }
+  }
 
-    .work-list {
-      gap: var(--space-6);
-    }
-
-    .work-item {
-      align-items: flex-start;
-      flex-direction: column;
-      gap: var(--space-2);
-    }
-
-    .work-item-main {
-      width: 100%;
-      align-items: flex-start;
-      flex-direction: column;
-      gap: var(--space-2);
-    }
-
-    .project-name {
-      font-size: var(--font-size-lg);
-    }
-
-    .work-item-archive .project-name {
-      font-size: var(--font-size-base);
-    }
-
-    .section-label {
-      font-size: var(--font-size-sm);
-    }
-
-    .section-intro {
-      font-size: var(--font-size-base);
-    }
-
-    .project-meta {
-      gap: var(--space-3);
-    }
-
-    .project-type,
+  @media (max-width: 500px) {
     .project-year {
-      min-width: 0;
-      text-align: left;
-    }
-
-    .work-item-featured {
-      cursor: default;
-      user-select: auto;
-    }
-
-    .work-item-featured::before {
-      display: none;
-    }
-
-    .preview {
       display: none;
     }
   }
@@ -436,12 +378,11 @@ const archiveProjects = [
       ".work-item-featured .work-item-main",
     );
     const preview = document.getElementById("preview");
-    const img = document.getElementById(
-      "preview-img",
-    ) as HTMLImageElement | null;
+    const swatch = document.getElementById("preview-swatch");
     const desc = document.getElementById("preview-desc");
+    const tags = document.getElementById("preview-tags");
 
-    if (!items.length || !preview || !img) {
+    if (!items.length || !preview) {
       cleanupWorkPreview = undefined;
       return;
     }
@@ -459,7 +400,11 @@ const archiveProjects = [
     const { signal } = controller;
 
     const updatePreviewPosition = () => {
-      preview.style.transform = `translate(${mouseX + 28}px, calc(${mouseY}px - 50%))`;
+      const vw = window.innerWidth;
+      const pw = preview.offsetWidth;
+      const offset = 28;
+      const x = mouseX + offset + pw > vw ? mouseX - pw - offset : mouseX + offset;
+      preview.style.transform = `translate(${x}px, calc(${mouseY}px - 50%))`;
       preview.style.left = "0";
       preview.style.top = "0";
     };
@@ -479,13 +424,17 @@ const archiveProjects = [
         "mouseenter",
         () => {
           const el = item as HTMLElement;
-          const src = el.dataset.img;
+          const color = el.dataset.color;
           const text = el.dataset.desc;
+          const tagList = el.dataset.tags?.split(",") ?? [];
 
-          if (!src) return;
-
-          img.src = src;
+          if (swatch) swatch.style.backgroundColor = color ?? "";
           if (desc) desc.textContent = text ?? "";
+          if (tags) {
+            tags.innerHTML = tagList
+              .map((t) => `<li>${t.trim()}</li>`)
+              .join("");
+          }
           preview.classList.add("visible");
         },
         { signal },

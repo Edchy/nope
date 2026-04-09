@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="About — NØPE" description="A bit about us.">
-  <section class="page-shell layout-shell">
+  <section class="page-shell layout-shell about-page">
     <div class="page-grid layout-grid">
       <h1 class="page-title visually-hidden">About</h1>
       <div class="about-chunk-1">
@@ -72,6 +72,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
 
   <style>
+    :global([data-theme="experimental"]) .about-page {
+      --color-text-primary: var(--color-text-inverse);
+      --color-text-secondary: var(--color-text-inverse);
+      color: var(--color-text-primary);
+    }
+
     .page-title {
       grid-column: 1 / 4;
       font-size: var(--font-size-sm);

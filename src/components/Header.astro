@@ -1,6 +1,6 @@
 ---
 import { SITE_TITLE } from "../config";
-import hamburgerIcon from "../assets/noun-hamburger-menu-5434658.svg?raw";
+
 
 const navLinks = [
   { href: "/work", label: "Work" },
@@ -58,7 +58,10 @@ const currentPath = Astro.url.pathname;
         aria-expanded="false"
         aria-controls="mobile-nav"
       >
-        <Fragment set:html={hamburgerIcon} />
+        <svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <line class="menu-icon__top" x1="3" y1="9" x2="21" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <line class="menu-icon__bot" x1="3" y1="15" x2="21" y2="15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
       </button>
     </div>
   </div>
@@ -114,6 +117,7 @@ const currentPath = Astro.url.pathname;
 
   .site-header__grid {
     align-items: center;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
   }
 
   /* Logo: columns 1–2 */
@@ -125,10 +129,11 @@ const currentPath = Astro.url.pathname;
     color: var(--color-text-primary);
     text-decoration: none;
     line-height: 1;
+    white-space: nowrap;
   }
 
   .site-header__logo-dot {
-    color: var(--color-accent-experimental);
+    color: currentColor;
   }
 
   /* Nav: columns 7–12, right-aligned */
@@ -191,12 +196,12 @@ const currentPath = Astro.url.pathname;
     height: 20px;
     border-radius: var(--border-radius-full);
     background-color: var(--button-theme-toggle-color);
-    border: 2px solid transparent;
+    border: none;
     cursor: pointer;
     flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
     transition:
       background-color 0.15s ease,
-      border-color 0.15s ease,
       box-shadow 0.15s ease;
   }
 
@@ -205,11 +210,6 @@ const currentPath = Astro.url.pathname;
     box-shadow: 0 0 0 3px var(--color-background),
                 0 0 0 5px var(--color-action-primary);
   }
-
-  .site-header__theme-toggle[aria-pressed="true"] {
-    border-color: var(--color-action-primary);
-  }
-
   .site-header__menu-trigger {
     display: none;
   }
@@ -219,33 +219,19 @@ const currentPath = Astro.url.pathname;
   }
 
   @media (max-width: 768px) {
+    .site-header__shell {
+      position: relative;
+    }
+
     .site-header__grid {
-      grid-template-columns: 1fr;
-      row-gap: var(--space-3);
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      row-gap: 0;
     }
 
     .site-header__logo {
-      grid-column: 1;
-    }
-
-    .site-header__nav {
-      display: flex;
-      grid-column: 1;
-      justify-content: flex-start;
-      flex-wrap: wrap;
-      gap: var(--space-4);
-    }
-
-    .site-header__links {
-      gap: var(--space-4);
-      flex-wrap: wrap;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .site-header__grid {
-      grid-template-columns: 1fr auto;
-      row-gap: 0;
+      grid-column: 1 / -1;
+      width: min(100%, 34rem);
+      margin-inline: auto;
     }
 
     .site-header__nav {
@@ -254,7 +240,10 @@ const currentPath = Astro.url.pathname;
 
     .site-header__menu-trigger {
       display: inline-flex;
-      grid-column: 2;
+      position: absolute;
+      right: var(--space-container-x);
+      top: 50%;
+      transform: translateY(-50%);
       align-items: center;
       justify-content: center;
       width: 44px;
@@ -265,15 +254,33 @@ const currentPath = Astro.url.pathname;
       border: none;
       cursor: pointer;
       z-index: 1001;
-      position: relative;
-      margin: -8px -8px -8px 0;
     }
 
     .site-header__menu-trigger :global(svg) {
-      width: var(--font-size-base);
-      height: var(--font-size-base);
-      fill: currentColor;
+      width: 1.5rem;
+      height: 1.5rem;
       display: block;
+    }
+
+    .site-header__menu-trigger :global(.menu-icon__top),
+    .site-header__menu-trigger :global(.menu-icon__bot) {
+      transition: transform 0.28s var(--motion-ease-decelerate);
+    }
+
+    .site-header__menu-trigger :global(.menu-icon__top) {
+      transform-origin: 12px 9px;
+    }
+
+    .site-header__menu-trigger :global(.menu-icon__bot) {
+      transform-origin: 12px 15px;
+    }
+
+    .site-header__menu-trigger[aria-expanded="true"] :global(.menu-icon__top) {
+      transform: translateY(3px) rotate(45deg);
+    }
+
+    .site-header__menu-trigger[aria-expanded="true"] :global(.menu-icon__bot) {
+      transform: translateY(-3px) rotate(-45deg);
     }
 
     /* Full-screen overlay — always rendered, opacity/pointer-events control visibility */
@@ -346,6 +353,7 @@ const currentPath = Astro.url.pathname;
       margin-top: var(--space-8);
     }
   }
+
 </style>
 
 <script>
@@ -382,27 +390,39 @@ const currentPath = Astro.url.pathname;
         if (header) header.style.zIndex = "101";
       };
 
+      const CLOSE_DURATION = 180; // must match CSS transition-duration for closed state
+
       const close = () => {
         nav.classList.remove("is-open");
         nav.setAttribute("aria-hidden", "true");
         trigger.setAttribute("aria-expanded", "false");
         document.body.style.overflow = "";
-        if (header) header.style.zIndex = "";
+        // Delay z-index reset until after the close transition finishes to prevent flicker
+        if (header) setTimeout(() => { header.style.zIndex = ""; }, CLOSE_DURATION);
       };
 
       const toggle = () => nav.classList.contains("is-open") ? close() : open();
 
       trigger.addEventListener("click", toggle, { signal });
 
-      // Close instantly on link click (no transition — let the page transition take over)
+      // On link click, keep the nav visible until navigation actually starts,
+      // then snap it away so there's no flash of the current page underneath.
       nav.querySelectorAll<HTMLAnchorElement>(".site-header__link").forEach((link) => {
         link.addEventListener("click", () => {
-          nav!.style.transition = "none";
-          close();
-          // Restore transition after the next paint so re-opening still animates
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => { nav!.style.transition = ""; });
-          });
+          const onNavStart = () => {
+            nav!.style.transition = "none";
+            nav!.classList.remove("is-open");
+            nav!.setAttribute("aria-hidden", "true");
+            trigger.setAttribute("aria-expanded", "false");
+            document.body.style.overflow = "";
+            if (header) header.style.zIndex = "";
+            // Restore transition after the next paint
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => { nav!.style.transition = ""; });
+            });
+            document.removeEventListener("astro:before-preparation", onNavStart);
+          };
+          document.addEventListener("astro:before-preparation", onNavStart);
         }, { signal });
       });
 

@@ -163,7 +163,7 @@
    ------------------------------------------------------------ */
 :root {
   --button-theme-toggle-color: var(--experimental-2);
-  --scrollbar-thumb-color: var(--experimental-1);
+  --scrollbar-thumb-color: var(--color-text-primary);
 }
 
 [data-theme="experimental"] {
@@ -172,5 +172,4 @@
   --color-text-secondary: var(--experimental-3);
   --color-accent-experimental: var(--neutral-100);
   --button-theme-toggle-color: var(--neutral-100);
-  --scrollbar-thumb-color: var(--experimental-2);
 }

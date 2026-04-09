@@ -1,10 +1,3 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <rect width="128" height="128" fill="#ffffe2"/>
-  <text x="64" y="98" font-family="Arial, sans-serif" font-size="100" font-weight="bold" fill="#000" text-anchor="middle">Ø</text>
-  <style>
-    @media (prefers-color-scheme: dark) {
-      rect { fill: #1a1a1a; }
-      text { fill: #ffffe2; }
-    }
-  </style>
+  <rect width="128" height="128" fill="#00d900" />
 </svg>
