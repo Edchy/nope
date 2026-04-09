@@ -12,8 +12,7 @@
 }
 
 html {
-  cursor: url("/images/cursor/mickey_cursor.png"), auto !important;
-
+  cursor: auto !important;
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
   overflow-x: clip;
@@ -70,6 +69,8 @@ body::before {
   background-position: fixed;
   pointer-events: none;
   z-index: -1;
+  contain: strict;
+  will-change: auto;
 }
 
 body > * {
@@ -155,6 +156,7 @@ a {
   margin-top: auto;
   overflow: hidden;
   overflow: clip;
+  contain: layout style paint;
 }
 
 .site-footer__shell {
@@ -303,6 +305,7 @@ a {
   background-color: var(--scrollbar-thumb-color);
   background-clip: padding-box;
   min-height: 2.5rem;
+  contain: paint;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -323,5 +326,5 @@ select,
 [role="button"],
 .clickable,
 summary {
-  cursor: url("/images/cursor/mickey_pointer.png"), pointer;
+  cursor: pointer;
 }
