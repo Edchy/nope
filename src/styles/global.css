@@ -12,7 +12,8 @@
 }
 
 html {
-  cursor: auto !important;
+  cursor: url("/images/cursor/mickey_cursor.png"), auto !important;
+
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
   overflow-x: clip;
@@ -326,5 +327,5 @@ select,
 [role="button"],
 .clickable,
 summary {
-  cursor: pointer;
+  cursor: url("/images/cursor/mickey_pointer.png"), pointer;
 }
